@@ -33,3 +33,4 @@ eval_results/
 .wandb/
 .ruff_cache/
 .codegraph/
+hf_token.txt

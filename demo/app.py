@@ -1,5 +1,6 @@
 import os
 import sys
+from importlib.util import find_spec
 from pathlib import Path
 
 import gradio as gr
@@ -16,6 +17,7 @@ sys.modules["ctx_to_lora.modeling_utils"] = hypernet
 
 # Global state
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+flash_attention_available = find_spec("flash_attn") is not None
 modulated_model = None
 chat_history = []
 ctx_tokenizer = None
@@ -89,7 +91,7 @@ def load_checkpoint(
         modulated_model = ModulatedPretrainedModel.from_state_dict(
             state_dict,
             train=False,
-            use_flash_attn=True,
+            use_flash_attn=flash_attention_available,
             use_sequence_packing=False,
         )
         modulated_model = modulated_model.to(device).to(torch.bfloat16)
