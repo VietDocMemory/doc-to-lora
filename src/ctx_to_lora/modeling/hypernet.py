@@ -513,12 +513,13 @@ class ModulatedPretrainedModel(nn.Module):
                 logger.debug(f"Applying LoRA forward to {name}")
                 module.forward_orig = module.forward
                 module.patched_forward = True
-                module.forward = partial(
+                module.forward_lora = partial(
                     lora_forward_fn,
                     self=module,
                     lora_dropout_p=self.peft_config.lora_dropout,
                     scaling=self.peft_config.lora_alpha,
                 )
+                module.forward = module.forward_lora
 
     def _init_model(self):
         # disable adapter of the base model
@@ -667,6 +668,18 @@ class ModulatedPretrainedModel(nn.Module):
 
         if isinstance(self.ctx_encoder.base_model, ModernBertModel):
             ctx_features = ctx_features.unsqueeze(0)
+        hypernet_dtype = next(self.hypernet.parameters()).dtype
+        if ctx_features.is_floating_point() and ctx_features.dtype != hypernet_dtype:
+            ctx_features = ctx_features.to(dtype=hypernet_dtype)
+        context_features_ok = torch.isfinite(ctx_features).all().item()
+        print(
+            "[DEBUG] Context features encoded successfully: "
+            f"{context_features_ok}; shape={tuple(ctx_features.shape)}; "
+            f"dtype={ctx_features.dtype}",
+            flush=True,
+        )
+        if not context_features_ok:
+            raise FloatingPointError("Context encoder produced NaN/Inf values")
         if self.user_defined_scaling == 1:
             return self.hypernet.generate_weights(
                 ctx_features, ctx_attn_mask, ctx_position_ids
@@ -682,6 +695,32 @@ class ModulatedPretrainedModel(nn.Module):
 
     def enable_iterative_mode(self, x: bool):
         self.hypernet.enable_iterative_mode(x)
+
+    @staticmethod
+    def _validate_generated_loras(generated_loras):
+        lora_tensors = [
+            tensor
+            for module_weights in generated_loras.values()
+            for tensor in module_weights.values()
+        ]
+        lora_weights_ok = bool(lora_tensors) and all(
+            torch.isfinite(tensor).all().item() for tensor in lora_tensors
+        )
+        print(
+            "[DEBUG] Dynamic LoRA weights generated successfully: "
+            f"{lora_weights_ok}",
+            flush=True,
+        )
+        if not lora_weights_ok:
+            raise FloatingPointError(
+                "Dynamic LoRA weights are empty or contain NaN/Inf values"
+            )
+        lora_norm = sum(tensor.float().norm().item() for tensor in lora_tensors)
+        print(
+            f"[DEBUG] Dynamic LoRA modules: {sorted(generated_loras)}; "
+            f"aggregate_norm={lora_norm:.6f}",
+            flush=True,
+        )
 
     def forward(
         self,
@@ -726,6 +765,7 @@ class ModulatedPretrainedModel(nn.Module):
             generated_loras, generated_layernorms = self.generate_weights(
                 ctx_ids, ctx_attn_mask, ctx_position_ids
             )
+            self._validate_generated_loras(generated_loras)
 
         if generated_loras is not None:
             generated_loras = combine_lora(
@@ -758,12 +798,17 @@ class ModulatedPretrainedModel(nn.Module):
                         device=self.device,
                     )
 
-            apply_lora_to_layers(
+            applied_module_count = apply_lora_to_layers(
                 self.base_model,
                 self.hypernet.layer_indices,
                 generated_loras,
                 n_queries,
                 position_ids,
+            )
+            print(
+                "[DEBUG] Dynamic LoRA hooks applied successfully: "
+                f"{applied_module_count} target modules",
+                flush=True,
             )
         model_outputs = self.base_model(*model_inputs_args, **model_inputs_kwargs)
 
@@ -868,6 +913,7 @@ class ModulatedPretrainedModel(nn.Module):
             )
 
         if generated_loras is not None:
+            self._validate_generated_loras(generated_loras)
             generated_loras = self.combine_lora(
                 generated_loras,
                 n_ctx_chunks,
@@ -901,12 +947,17 @@ class ModulatedPretrainedModel(nn.Module):
                         device=self.device,
                     )
 
-            apply_lora_to_layers(
+            applied_module_count = apply_lora_to_layers(
                 self.base_model,
                 self.hypernet.layer_indices,
                 generated_loras,
                 n_queries,
                 position_ids,
+            )
+            print(
+                "[DEBUG] Dynamic LoRA hooks applied successfully: "
+                f"{applied_module_count} target modules",
+                flush=True,
             )
 
         model_outputs = self.base_model.generate(

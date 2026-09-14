@@ -2,12 +2,13 @@ import gc
 import os
 import re
 import sys
-from importlib.util import find_spec
+import threading
 from pathlib import Path
 
 import gradio as gr
 import torch
 from transformers import BitsAndBytesConfig
+from transformers.utils import is_flash_attn_2_available
 
 # Add the src directory to the path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -20,12 +21,13 @@ sys.modules["ctx_to_lora.modeling_utils"] = hypernet
 
 # Global state
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-flash_attention_available = find_spec("flash_attn") is not None
+flash_attention_available = is_flash_attn_2_available()
 modulated_model = None
 chat_history = []
 ctx_tokenizer = None
 base_tokenizer = None
 context_chunk_tokens = -1
+generation_lock = threading.Lock()
 
 try:
     DEFAULT_CONTEXT = Path("data/sakana_wiki.txt").read_text(encoding="utf-8").strip()
@@ -157,6 +159,25 @@ def load_checkpoint(
             modulated_model = modulated_model.to(device).to(torch.bfloat16)
         modulated_model.eval()
 
+        base_attn = modulated_model.base_model.config._attn_implementation
+        ctx_attn = modulated_model.ctx_encoder.config._attn_implementation
+        perceiver_attn = (
+            modulated_model.hypernet.aggregator.perceiver.encoder.config
+            ._attn_implementation
+        )
+        print(
+            "[DEBUG] Attention implementations: "
+            f"base={base_attn}, context_encoder={ctx_attn}, "
+            f"perceiver={perceiver_attn}",
+            flush=True,
+        )
+        print(
+            "[DEBUG] Runtime dtypes: "
+            f"hypernet={next(modulated_model.hypernet.parameters()).dtype}, "
+            f"context_encoder={next(modulated_model.ctx_encoder.parameters()).dtype}",
+            flush=True,
+        )
+
         ctx_encoder_model_name_or_path = (
             modulated_model.ctx_encoder_args.ctx_encoder_model_name_or_path
             or modulated_model.base_model.config.name_or_path
@@ -268,45 +289,52 @@ def generate_response(
         chat_history.append({"role": "user", "content": user_message})
 
         context = context.strip() if context else ""
-        print(f"Processing single context with scaler: {context_scaler}")
-        print(f"Bias scaler: {bias_scaler}")
+        print(f"[DEBUG] Raw Context Length: {len(context)}", flush=True)
+        print(
+            f"[DEBUG] Context Scaling: {context_scaler}, "
+            f"Bias Scaler: {bias_scaler}",
+            flush=True,
+        )
 
-        with torch.inference_mode(), torch.amp.autocast(str(device)):
+        with generation_lock, torch.inference_mode(), torch.amp.autocast(str(device)):
             ctx_inputs = process_context(context)
             ctx_ids = ctx_inputs["ctx_ids"].to(device)
             ctx_attn_mask = ctx_inputs["ctx_attn_mask"].to(device)
-
-            scalers_tensor = torch.tensor(
-                [context_scaler], dtype=torch.float32, device=device
+            active_context_tokens = int(ctx_attn_mask.sum().item())
+            print(
+                f"[DEBUG] Context Encoding: shape={tuple(ctx_ids.shape)}, "
+                f"active_tokens={active_context_tokens}, "
+                f"chunks={ctx_ids.shape[0]}",
+                flush=True,
             )
 
+            hypernet_dtype = next(modulated_model.hypernet.parameters()).dtype
+            scalers_tensor = torch.tensor(
+                [context_scaler], dtype=hypernet_dtype, device=device
+            )
             model_inputs = base_tokenizer.apply_chat_template(
                 chat_history, return_tensors="pt", add_generation_prompt=True
             ).to(device)
-
-            print(f"Context: {context}")
-            print(f"Chat history: {chat_history}")
-
             outputs = modulated_model.generate(
                 ctx_ids=ctx_ids,
                 ctx_attn_mask=ctx_attn_mask,
-                n_ctx_chunks=torch.tensor([len(ctx_ids)], device=ctx_ids.device),
+                n_ctx_chunks=torch.tensor(
+                    [ctx_ids.shape[0]], dtype=torch.long, device=ctx_ids.device
+                ),
                 scalers=scalers_tensor,
                 bias_scaler=bias_scaler,
                 input_ids=model_inputs,
-                max_new_tokens=192,
-                do_sample=False,
-                temperature=None,
-                top_p=None,
-                top_k=None,
-                repetition_penalty=1.1,
-                no_repeat_ngram_size=4,
+                attention_mask=torch.ones_like(model_inputs),
+                max_new_tokens=256,
+                do_sample=True,
+                temperature=0.3,
+                top_p=0.9,
+                repetition_penalty=1.15,
+                no_repeat_ngram_size=3,
                 use_cache=True,
                 eos_token_id=base_tokenizer.eos_token_id,
-                pad_token_id=base_tokenizer.pad_token_id
-                or base_tokenizer.eos_token_id,
+                pad_token_id=base_tokenizer.eos_token_id,
             )
-
             response = base_tokenizer.decode(
                 outputs[0][model_inputs.shape[1] :], skip_special_tokens=True
             )

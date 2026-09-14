@@ -80,8 +80,9 @@ def apply_lora_to_layers(
     generated_loras: dict[str, dict[str, Float[Tensor, "n_ctx n_layers r _"]]],
     n_qs: Integer[Tensor, "n_ctx"],
     position_ids: Integer[Tensor, "bs seq_len"] = None,
-) -> None:
+) -> int:
     layers = get_layers(model)
+    applied_module_count = 0
     if position_ids is not None:
         position_ids = position_ids.squeeze(0)
         seq_lens = position_ids[torch.where(position_ids == 0)[0][1:] - 1]
@@ -100,10 +101,23 @@ def apply_lora_to_layers(
             elif mname in ["down_proj", "up_proj", "gate_proj"]:
                 long_mname = f"mlp.{mname}"
             module = attrgetter(long_mname)(layer)
+            if not getattr(module, "patched_forward", False) or not hasattr(
+                module, "forward_lora"
+            ):
+                raise RuntimeError(
+                    f"Dynamic LoRA wrapper is missing for layer {layer_idx} "
+                    f"module {long_mname}"
+                )
             A = generated_loras[mname]["A"][:, layer_idx]
             B = generated_loras[mname]["B"][:, layer_idx]
-            module.forward = partial(module.forward, n_qs=n_qs, tot_q=tot_q, A=A, B=B)
+            # Always bind weights to the stable wrapper. Binding on top of the
+            # current forward repeatedly creates an ever-growing partial chain.
+            module.forward = partial(
+                module.forward_lora, n_qs=n_qs, tot_q=tot_q, A=A, B=B
+            )
             if position_ids is not None:
                 module.forward = partial(
                     module.forward, seq_lens=seq_lens, tot_len=tot_len
                 )
+            applied_module_count += 1
+    return applied_module_count
