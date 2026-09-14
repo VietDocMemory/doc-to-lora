@@ -1,15 +1,18 @@
+import gc
 import os
+import re
 import sys
 from importlib.util import find_spec
 from pathlib import Path
 
 import gradio as gr
 import torch
+from transformers import BitsAndBytesConfig
 
 # Add the src directory to the path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from ctx_to_lora.data.processing import tokenize_ctx_text
+from ctx_to_lora.data.processing import split_too_long_ctx, tokenize_ctx_text
 from ctx_to_lora.model_loading import get_tokenizer
 from ctx_to_lora.modeling import hypernet
 
@@ -22,6 +25,7 @@ modulated_model = None
 chat_history = []
 ctx_tokenizer = None
 base_tokenizer = None
+context_chunk_tokens = -1
 
 try:
     DEFAULT_CONTEXT = Path("data/sakana_wiki.txt").read_text(encoding="utf-8").strip()
@@ -41,14 +45,19 @@ Sakana AI is not responsible for any direct or indirect loss resulting from usin
 
 
 def load_custom_chat_template(tokenizer, model_name):
-    if "gemma" in model_name.lower():
-        template_path = "chat_templates/google/gemma-2-2b-it.jinja"
-        if os.path.exists(template_path):
-            with open(template_path) as f:
-                template_content = f.read()
-                tokenizer.chat_template = template_content
-                print(f"Loaded custom chat template from {template_path}")
-                return True
+    model_name_lower = model_name.lower()
+    template_paths = {
+        "gemma": "chat_templates/google/gemma-2-2b-it.jinja",
+        "mistral": "chat_templates/mistralai/Mistral-7B-Instruct-v0.2.jinja",
+        "qwen": "chat_templates/Qwen/Qwen3-4B-Instruct-2507.jinja",
+    }
+    for family, template_path in template_paths.items():
+        if family not in model_name_lower or not os.path.exists(template_path):
+            continue
+        with open(template_path, encoding="utf-8") as template_file:
+            tokenizer.chat_template = template_file.read()
+        print(f"Loaded custom chat template from {template_path}")
+        return True
     return False
 
 
@@ -73,6 +82,7 @@ def load_checkpoint(
     checkpoint_path: str,
 ) -> tuple[str, gr.update, gr.update, gr.update, gr.update]:
     global modulated_model, ctx_tokenizer, base_tokenizer, chat_history
+    global context_chunk_tokens
 
     if not checkpoint_path or checkpoint_path == "No checkpoints found":
         return (
@@ -87,14 +97,64 @@ def load_checkpoint(
         print(f"Loading checkpoint: {checkpoint_path}")
         from ctx_to_lora.modeling.hypernet import ModulatedPretrainedModel
 
-        state_dict = torch.load(checkpoint_path, weights_only=False)
+        # Release the previous model before constructing another checkpoint.
+        # Keeping both alive can exhaust a 10 GB GPU during model switches.
+        old_model = modulated_model
+        modulated_model = None
+        ctx_tokenizer = None
+        base_tokenizer = None
+        del old_model
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+
+        state_dict = torch.load(
+            checkpoint_path, map_location="cpu", weights_only=False
+        )
+        args_path = Path(checkpoint_path).parent.parent / "args.yaml"
+        context_chunk_tokens = -1
+        if args_path.exists():
+            chunk_match = re.search(
+                r"^max_ctx_chunk_len:\s*(-?\d+)\s*$",
+                args_path.read_text(encoding="utf-8"),
+                flags=re.MULTILINE,
+            )
+            if chunk_match:
+                context_chunk_tokens = int(chunk_match.group(1))
+        print(f"Context chunk size: {context_chunk_tokens}")
+        model_name = state_dict["base_model_name_or_path"]
+        gpu_memory = (
+            torch.cuda.get_device_properties(0).total_memory
+            if torch.cuda.is_available()
+            else 0
+        )
+        use_4bit_base = gpu_memory and gpu_memory < 16 * 1024**3 and any(
+            family in model_name.lower() for family in ("qwen", "mistral")
+        )
+        base_model_kwargs = None
+        if use_4bit_base:
+            print(f"Loading {model_name} in 4-bit mode for the available GPU memory")
+            base_model_kwargs = {
+                "quantization_config": BitsAndBytesConfig(
+                    load_in_4bit=True,
+                    bnb_4bit_quant_type="nf4",
+                    bnb_4bit_compute_dtype=torch.bfloat16,
+                    bnb_4bit_use_double_quant=True,
+                )
+            }
         modulated_model = ModulatedPretrainedModel.from_state_dict(
             state_dict,
             train=False,
+            base_model_kwargs=base_model_kwargs,
             use_flash_attn=flash_attention_available,
             use_sequence_packing=False,
         )
-        modulated_model = modulated_model.to(device).to(torch.bfloat16)
+        if use_4bit_base:
+            # Transformers already places quantized modules; converting them via
+            # Module.to(dtype) is unsupported. HyperLoRA remains safe to convert.
+            modulated_model.hypernet.to(device=device, dtype=torch.bfloat16)
+        else:
+            modulated_model = modulated_model.to(device).to(torch.bfloat16)
         modulated_model.eval()
 
         ctx_encoder_model_name_or_path = (
@@ -106,6 +166,7 @@ def load_checkpoint(
             modulated_model.base_model.config.name_or_path, train=False
         )
 
+        load_custom_chat_template(ctx_tokenizer, ctx_encoder_model_name_or_path)
         load_custom_chat_template(
             base_tokenizer, modulated_model.base_model.config.name_or_path
         )
@@ -145,13 +206,22 @@ def process_context(context: str) -> dict:
     context = context.strip() if context else ""
     tokenized_contexts = tokenize_ctx_text({"context": [context]}, ctx_tokenizer)
     ctx_ids = tokenized_contexts["ctx_ids"]
+    if context_chunk_tokens > 0:
+        split_context = split_too_long_ctx(
+            {"ctx_ids": ctx_ids[0]},
+            model_name_or_path=ctx_tokenizer.name_or_path,
+            num_chunk_probs=None,
+            max_chunk_len=context_chunk_tokens,
+            min_chunk_len=-1,
+            max_num_split=None,
+            is_train=False,
+        )
+        ctx_ids = split_context["ctx_ids"]
+        print(f"Context chunks: {split_context['n_ctx_chunks']}")
     ctx_ids = [
         torch.tensor(ctx_id, dtype=torch.long, device=device) for ctx_id in ctx_ids
     ]
     ctx_attn_mask = [torch.ones_like(ids) for ids in ctx_ids]
-    ctx_attn_mask = [
-        torch.tensor(mask, dtype=torch.long, device=device) for mask in ctx_attn_mask
-    ]
     ctx_ids = torch.nn.utils.rnn.pad_sequence(
         ctx_ids,
         batch_first=True,
@@ -224,9 +294,17 @@ def generate_response(
                 scalers=scalers_tensor,
                 bias_scaler=bias_scaler,
                 input_ids=model_inputs,
-                max_new_tokens=512,
+                max_new_tokens=192,
                 do_sample=False,
-                temperature=0,
+                temperature=None,
+                top_p=None,
+                top_k=None,
+                repetition_penalty=1.1,
+                no_repeat_ngram_size=4,
+                use_cache=True,
+                eos_token_id=base_tokenizer.eos_token_id,
+                pad_token_id=base_tokenizer.pad_token_id
+                or base_tokenizer.eos_token_id,
             )
 
             response = base_tokenizer.decode(
