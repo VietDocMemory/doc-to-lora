@@ -61,9 +61,9 @@ DS_KWARGS = {
         validation=dict(path="sggetao/PwC", split="train[:900]"),
     ),
     "squad": dict(
-        train=dict(path="data/raw_datasets/squad", split="train"),
-        validation=dict(path="data/raw_datasets/squad", split="validation[:1000]"),
-        test=dict(path="data/raw_datasets/squad", split="validation"),
+        train=dict(path="rajpurkar/squad", split="train"),
+        validation=dict(path="rajpurkar/squad", split="validation[:1000]"),
+        test=dict(path="rajpurkar/squad", split="validation"),
     ),
     "squad_compact": dict(
         train=dict(

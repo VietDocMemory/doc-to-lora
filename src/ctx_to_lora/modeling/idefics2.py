@@ -246,12 +246,14 @@ class Idefics2PerceiverAttention(nn.Module):
     def forward(
         self,
         latents: torch.Tensor,
-        context: torch.Tensor,
+        is_cross_attn: bool = True,
+        context: torch.Tensor | None = None,
         attention_mask: torch.Tensor | None = None,
         position_ids: torch.LongTensor | None = None,
         past_key_value: tuple[torch.Tensor] | None = None,
         output_attentions: bool = False,
         use_cache: bool = False,
+        **kwargs,
     ) -> tuple[torch.Tensor, torch.Tensor | None, tuple[torch.Tensor] | None]:
         """
         Runs Perceiver Self-Attention, with special (context, latents) appended along the `seq` dimension!
@@ -266,9 +268,15 @@ class Idefics2PerceiverAttention(nn.Module):
             use_cache (`bool`, *optional*, defaults to `False`): Whether to use past_key_value for caching.
         """
         bsz, q_len, _ = latents.size()
-        kv_seq_len = q_len + context.size()[1]
 
-        hidden_states = torch.concat([context, latents], dim=-2)
+        if is_cross_attn:
+            if context is None:
+                raise ValueError("context is required for cross-attention")
+            hidden_states = torch.concat([context, latents], dim=-2)
+            kv_seq_len = q_len + context.size(1)
+        else:
+            hidden_states = latents
+            kv_seq_len = q_len
 
         query_states = self.q_proj(latents)
         key_states = self.k_proj(hidden_states)
@@ -306,9 +314,21 @@ class Idefics2PerceiverAttention(nn.Module):
             )
 
         if attention_mask is not None:
+            if (
+                is_cross_attn
+                and attention_mask.size(-1) == context.size(1)
+            ):
+                latent_mask = torch.zeros(
+                    (*attention_mask.shape[:-1], q_len),
+                    dtype=attention_mask.dtype,
+                    device=attention_mask.device,
+                )
+                attention_mask = torch.cat([attention_mask, latent_mask], dim=-1)
+
             if attention_mask.size() != (bsz, 1, q_len, kv_seq_len):
                 raise ValueError(
-                    f"Attention mask should be of size {(bsz, 1, q_len, kv_seq_len)}, but is {attention_mask.size()}"
+                    f"Attention mask should be of size {(bsz, 1, q_len, kv_seq_len)}, "
+                    f"but is {attention_mask.size()}"
                 )
 
             attn_weights = attn_weights + attention_mask
@@ -448,7 +468,7 @@ class Idefics2PerceiverFlashAttention2(Idefics2PerceiverAttention):
 
 
 IDEFICS2_PERCEIVER_ATTENTION_CLASSES = {
-    # "eager": Idefics2PerceiverAttention,
+    "eager": Idefics2PerceiverAttention,
     "flash_attention_2": Idefics2PerceiverFlashAttention2,
 }
 
@@ -611,8 +631,9 @@ class Idefics2PerceiverResampler(Idefics2PreTrainedModel):
 
         self.layernorm = Idefics2RMSNorm(self.hidden_size, eps=self.rms_norm_eps)
 
-        self._use_flash_attention_2 = config._attn_implementation == "flash_attention_2"
-        assert self._use_flash_attention_2
+        self._use_flash_attention_2 = (
+            config._attn_implementation == "flash_attention_2"
+        )
 
     def forward(
         self,
@@ -629,13 +650,19 @@ class Idefics2PerceiverResampler(Idefics2PreTrainedModel):
 
         latents = self.latents_q.unsqueeze(0).expand((bsz, *self.latents_q.size()))
 
-        attention_mask = (
-            _prepare_4d_attention_mask(
-                attention_mask, latents.dtype, tgt_len=self.n_latents
+        if not self._use_flash_attention_2:
+            if attention_mask is None:
+                attention_mask = torch.ones(
+                    context.shape[:2],
+                    dtype=torch.long,
+                    device=context.device,
+                )
+
+            attention_mask = _prepare_4d_attention_mask(
+                attention_mask,
+                latents.dtype,
+                tgt_len=self.n_latents,
             )
-            if not self._use_flash_attention_2
-            else attention_mask
-        )
 
         compressed_context = latents
 
@@ -647,11 +674,18 @@ class Idefics2PerceiverResampler(Idefics2PreTrainedModel):
         # max_length_k = None
         if attention_mask is not None:
             logger.warning_once("Using attention mask for resampler")
-            context, _, cu_seq_lens_k, max_length_k, _ = unpad_input(
-                context, attention_mask
-            )
-            context = context.unsqueeze(0)
-            position_ids = True  # goes down flash attn path that uses cu_seq_lens
+
+            if self._use_flash_attention_2:
+                context, _, cu_seq_lens_k, max_length_k, _ = unpad_input(
+                    context, attention_mask
+                )
+                context = context.unsqueeze(0)
+                position_ids = True
+            else:
+                # Eager attention: giữ tensor dạng [batch, seq_len, hidden]
+                cu_seq_lens_k = None
+                max_length_k = context.shape[1]
+                position_ids = None
 
         elif position_ids is not None:
             logger.warning_once("Using position ids for resampler")
@@ -676,24 +710,34 @@ class Idefics2PerceiverResampler(Idefics2PreTrainedModel):
 
         else:
             raise ValueError("either position_ids or attention_mask is required")
-        x_attn_kwargs = dict(
-            position_ids=position_ids,
-            cu_seq_lens_q=cu_seq_lens_q,
-            cu_seq_lens_k=cu_seq_lens_k,
-            max_length_q=max_length_q,
-            max_length_k=max_length_k,
-        )
+        if self._use_flash_attention_2:
+            x_attn_kwargs = dict(
+                position_ids=position_ids,
+                cu_seq_lens_q=cu_seq_lens_q,
+                cu_seq_lens_k=cu_seq_lens_k,
+                max_length_q=max_length_q,
+                max_length_k=max_length_k,
+            )
+        else:
+            x_attn_kwargs = dict(
+                attention_mask=attention_mask,
+                position_ids=position_ids,
+            )
         self_attn_position_ids = torch.arange(
             self.n_latents, device=context.device, dtype=torch.int32
         ).repeat(1, bsz)
-        self_attn_kwargs = dict(
-            # attention_mask=self_attn_mask,
-            position_ids=self_attn_position_ids,
-            cu_seq_lens_q=cu_seq_lens_q,
-            cu_seq_lens_k=cu_seq_lens_q,
-            max_length_q=max_length_q,
-            max_length_k=max_length_q,
-        )
+        if self._use_flash_attention_2:
+            self_attn_kwargs = dict(
+                position_ids=self_attn_position_ids,
+                cu_seq_lens_q=cu_seq_lens_q,
+                cu_seq_lens_k=cu_seq_lens_q,
+                max_length_q=max_length_q,
+                max_length_k=max_length_q,
+            )
+        else:
+            self_attn_kwargs = dict(
+                position_ids=self_attn_position_ids,
+            )
         for i, layer in enumerate(self.layers):
             inp_kwargs = dict(
                 latents=compressed_context,

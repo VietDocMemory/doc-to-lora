@@ -713,7 +713,7 @@ def evaluate(
     """Main evaluation function."""
     assert split in ["validation", "test"]
     ctx_name = None
-    model_kwargs = dict(attn_implementation="flash_attention_2")
+    model_kwargs = dict(attn_implementation="eager")
 
     tokenizer = get_tokenizer(args.model_name_or_path, train=False)
     if tokenizer.pad_token_id is None:
@@ -734,7 +734,7 @@ def evaluate(
             state_dict,
             train=False,
             base_model_kwargs=model_kwargs,
-            use_flash_attn=True,
+            use_flash_attn=False,
             use_sequence_packing=False,  # for generation
             user_defined_scaling=args.gen_lora_scaling,
         )
@@ -756,7 +756,7 @@ def evaluate(
             train=False,
             requires_grad=False,
             model_kwargs=model_kwargs,
-            use_flash_attn=True,
+            use_flash_attn=False,
         )
         add_tracker(base_model.generate, "generate")
         if use_cd := getattr(args, "use_cd", False):
