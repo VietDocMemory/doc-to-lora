@@ -1,0 +1,14 @@
+model_name,group_len,tasks,num_samples,qa_f1,qa_f1_score,qa_precision,qa_recall
+gemma-2-2b-it_gemma_demo,0-127,test_squad,2744,None,0.7714515191819222,0.7723255151433499,0.8036698763388264
+gemma-2-2b-it_gemma_demo,128-255,test_squad,6663,None,0.7159009043434159,0.7215851168945933,0.7377786863007305
+gemma-2-2b-it_gemma_demo,256-511,test_squad,1114,None,0.598272602199751,0.6054703638396061,0.6144768378800761
+gemma-2-2b-it_gemma_demo,0-511,test_squad,10521,None,0.7179342622493963,0.7225241738180163,0.7419082525324506
+gemma-2-2b-it_gemma_demo,512-1023,test_squad,49,None,0.41773394968978295,0.4638159046042889,0.4026577297585701
+gemma-2-2b-it_gemma_demo,1024-2047,test_squad,0,None,N/A,N/A,N/A
+gemma-2-2b-it_gemma_demo,2048-4095,test_squad,0,None,N/A,N/A,N/A
+gemma-2-2b-it_gemma_demo,4096-8191,test_squad,0,None,N/A,N/A,N/A
+gemma-2-2b-it_gemma_demo,0-8191,test_squad,10570,None,0.7165426051713053,0.7213248639607341,0.7403355679897902
+gemma-2-2b-it_gemma_demo,8192-16383,test_squad,0,None,N/A,N/A,N/A
+gemma-2-2b-it_gemma_demo,16384-32767,test_squad,0,None,N/A,N/A,N/A
+gemma-2-2b-it_gemma_demo,32768-inf,test_squad,0,None,N/A,N/A,N/A
+gemma-2-2b-it_gemma_demo,overall,test_squad,10570,N/A,0.7165426051713053,0.7213248639607341,0.7403355679897902

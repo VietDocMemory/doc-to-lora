@@ -1,0 +1,159 @@
+2026-09-19 21:11:01 INFO: Logging to: trained_d2l/gemma_demo/eval-results-80000/20260919-211101_f2823a2a/debug.log
+2026-09-19 21:11:01 DEBUG: CMD: run_eval.py --checkpoint_path trained_d2l/gemma_demo/checkpoint-80000/pytorch_model.bin --datasets drop --split test --max_test_samples_per_ds 999999 --eval_batch_size_gen 1 --max_new_tokens 128 --max_ctx_chunk_len 8192
+2026-09-19 21:11:01 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-19 21:11:02 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2026-09-19 21:11:03 INFO: Using chat template from chat_templates/google/gemma-2-2b-it.jinja
+2026-09-19 21:11:04 DEBUG: Model init kwargs: {'pretrained_model_name_or_path': 'google/gemma-2-2b-it', 'device_map': 'cuda', 'torch_dtype': torch.bfloat16, 'trust_remote_code': True, 'attn_implementation': 'eager', 'use_cache': None}
+2026-09-19 21:11:04 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/config.json HTTP/1.1" 200 0
+2026-09-19 21:11:08 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/generation_config.json HTTP/1.1" 200 0
+2026-09-19 21:11:08 DEBUG: HyperLoRA config: HypernetConfig(latent_size=512, use_light_weight_lora=False, light_weight_latent_size=128, per_rank_gen=True, use_per_rank_bias=False, use_bias=True, per_layer_processing=True, use_token_mixing=False, num_pre_head_layers=1, dropout_rate=0.0, lora_config=LoraConfig(task_type='CAUSAL_LM', peft_type=<PeftType.LORA: 'LORA'>, auto_mapping=None, peft_version=None, base_model_name_or_path='google/gemma-2-2b-it', revision=None, inference_mode=False, r=8, target_modules={'down_proj'}, exclude_modules=None, lora_alpha=45.254833995939045, lora_dropout=0.0, fan_in_fan_out=False, bias='none', use_rslora=False, modules_to_save=None, init_lora_weights=True, layers_to_transform=None, layers_pattern=None, rank_pattern={}, alpha_pattern={}, megatron_config=None, megatron_core='megatron.core', trainable_token_indices=None, loftq_config={}, eva_config=None, corda_config=None, lora_ga_config=None, use_dora=False, velora_config=None, alora_invocation_tokens=None, use_qalora=False, qalora_group_size=16, monteclora_config=None, layer_replication=None, runtime_config=LoraRuntimeConfig(ephemeral_gpu_offload=False), lora_bias=False, target_parameters=None, use_bdlora=None, arrow_config=None, kasa_config=None, ensure_weight_tying=False), extra_modules=None, base_hidden_size=2304, layer_indices=tensor([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17,
+        18, 19, 20, 21, 22, 23, 24, 25]), feature_sizes=({'down_proj': 9216}, {'down_proj': 2304}), aggregator_config=AggregatorConfig(aggregator_type='perceiver', num_layers=26, num_modules=1, num_extra_modules=0, output_size=512, feature_size=2304, pooling_type='mean', num_latent_factor=8, lora_r=8, per_rank_gen=True, n_latent_queries=8, num_blocks=9, num_self_attn_per_block=0, shared_weights=False, layer_to_layer_ctx_encoder=True))
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: Applying LoRA forward to mlp.down_proj
+2026-09-19 21:11:11 DEBUG: ctx_model_name: google/gemma-2-2b-it
+2026-09-19 21:11:11 DEBUG: base_model.config._attn_implementation: eager
+2026-09-19 21:11:11 DEBUG: Model init kwargs: {'pretrained_model_name_or_path': 'google/gemma-2-2b-it', 'device_map': 'cuda', 'torch_dtype': torch.bfloat16, 'trust_remote_code': True, 'attn_implementation': 'eager', 'use_cache': None, 'quantization_config': BitsAndBytesConfig {
+  "_load_in_4bit": true,
+  "_load_in_8bit": false,
+  "bnb_4bit_compute_dtype": "bfloat16",
+  "bnb_4bit_quant_storage": "uint8",
+  "bnb_4bit_quant_type": "nf4",
+  "bnb_4bit_use_double_quant": true,
+  "llm_int8_enable_fp32_cpu_offload": false,
+  "llm_int8_has_fp16_weight": false,
+  "llm_int8_skip_modules": null,
+  "llm_int8_threshold": 6.0,
+  "load_in_4bit": true,
+  "load_in_8bit": false,
+  "quant_method": "bitsandbytes"
+}
+}
+2026-09-19 21:11:11 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/config.json HTTP/1.1" 200 0
+2026-09-19 21:11:15 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/generation_config.json HTTP/1.1" 200 0
+2026-09-19 21:11:15 DEBUG: peft_weights: {'down_proj': {'lora_dropout': Identity(), 'lora_A': Linear(in_features=9216, out_features=8, bias=False), 'lora_B': Linear(in_features=8, out_features=2304, bias=False)}}
+2026-09-19 21:11:15 DEBUG: HyperLoRA config: HypernetConfig(latent_size=512, use_light_weight_lora=False, light_weight_latent_size=128, per_rank_gen=True, use_per_rank_bias=False, use_bias=True, per_layer_processing=True, use_token_mixing=False, num_pre_head_layers=1, dropout_rate=0.0, lora_config=LoraConfig(task_type='CAUSAL_LM', peft_type=<PeftType.LORA: 'LORA'>, auto_mapping=None, peft_version=None, base_model_name_or_path='google/gemma-2-2b-it', revision=None, inference_mode=False, r=8, target_modules={'down_proj'}, exclude_modules=None, lora_alpha=45.254833995939045, lora_dropout=0.0, fan_in_fan_out=False, bias='none', use_rslora=False, modules_to_save=None, init_lora_weights=True, layers_to_transform=None, layers_pattern=None, rank_pattern={}, alpha_pattern={}, megatron_config=None, megatron_core='megatron.core', trainable_token_indices=None, loftq_config={}, eva_config=None, corda_config=None, lora_ga_config=None, use_dora=False, velora_config=None, alora_invocation_tokens=None, use_qalora=False, qalora_group_size=16, monteclora_config=None, layer_replication=None, runtime_config=LoraRuntimeConfig(ephemeral_gpu_offload=False), lora_bias=False, target_parameters=None, use_bdlora=None, arrow_config=None, kasa_config=None, ensure_weight_tying=False), extra_modules=None, base_hidden_size=2304, layer_indices=tensor([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17,
+        18, 19, 20, 21, 22, 23, 24, 25]), feature_sizes=({'down_proj': 9216}, {'down_proj': 2304}), aggregator_config=AggregatorConfig(aggregator_type='perceiver', num_layers=26, num_modules=1, num_extra_modules=0, output_size=512, feature_size=2304, pooling_type='mean', num_latent_factor=8, lora_r=8, per_rank_gen=True, n_latent_queries=8, num_blocks=9, num_self_attn_per_block=0, shared_weights=False, layer_to_layer_ctx_encoder=True))
+2026-09-19 21:11:18 DEBUG: ctx_model_name: google/gemma-2-2b-it
+2026-09-19 21:11:18 DEBUG: base_model.config._attn_implementation: eager
+2026-09-19 21:11:18 DEBUG: Model init kwargs: {'pretrained_model_name_or_path': 'google/gemma-2-2b-it', 'device_map': 'cuda', 'torch_dtype': torch.bfloat16, 'trust_remote_code': True, 'attn_implementation': 'eager', 'use_cache': None, 'quantization_config': BitsAndBytesConfig {
+  "_load_in_4bit": true,
+  "_load_in_8bit": false,
+  "bnb_4bit_compute_dtype": "bfloat16",
+  "bnb_4bit_quant_storage": "uint8",
+  "bnb_4bit_quant_type": "nf4",
+  "bnb_4bit_use_double_quant": true,
+  "llm_int8_enable_fp32_cpu_offload": false,
+  "llm_int8_has_fp16_weight": false,
+  "llm_int8_skip_modules": null,
+  "llm_int8_threshold": 6.0,
+  "load_in_4bit": true,
+  "load_in_8bit": false,
+  "quant_method": "bitsandbytes"
+}
+}
+2026-09-19 21:11:18 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/config.json HTTP/1.1" 200 0
+2026-09-19 21:11:22 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/generation_config.json HTTP/1.1" 200 0
+2026-09-19 21:11:22 INFO: load result: <All keys matched successfully>
+2026-09-19 21:11:22 INFO: Loading dataset drop with split test...
+2026-09-19 21:11:22 DEBUG: Tokenizing dataset with kwargs: {"ds_name": "drop", "split": "test", "add_negative_prompt": false, "max_qas_len": -1, "max_qas_per_sample": 1, "base_model_max_len": 8192, "ctx_model_max_len": 8192, "add_ctx_to_chat": false, "max_ctx_chunk_len": 8192, "min_ctx_chunk_len": -1, "num_chunk_probs": null, "max_ctx_chunk_num": null, "need_ctx_ids": true, "max_new_tokens": 128, "set_format": "pt"}google/gemma-2-2b-itgoogle/gemma-2-2b-it
+2026-09-19 21:11:22 DEBUG: Dataset hash: 7aa9c4c8b80df0b4a6989b784690c8675d64223c4b428ef6e4ad9b2be377e02d
+2026-09-19 21:11:22 INFO: Loading dataset drop with split test...
+2026-09-19 21:11:23 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/main/README.md HTTP/1.1" 307 0
+2026-09-19 21:11:23 DEBUG: https://huggingface.co:443 "HEAD /api/resolve-cache/datasets/ucinlp/drop/95cda593fae71b60b5b19f82de3fcf3298c1239c/README.md HTTP/1.1" 200 0
+2026-09-19 21:11:23 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/95cda593fae71b60b5b19f82de3fcf3298c1239c/drop.py HTTP/1.1" 404 0
+2026-09-19 21:11:23 DEBUG: Starting new HTTPS connection (1): s3.amazonaws.com:443
+2026-09-19 21:11:28 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-19 21:11:28 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/95cda593fae71b60b5b19f82de3fcf3298c1239c/.huggingface.yaml HTTP/1.1" 404 0
+2026-09-19 21:11:28 DEBUG: Starting new HTTPS connection (1): datasets-server.huggingface.co:443
+2026-09-19 21:11:29 DEBUG: https://datasets-server.huggingface.co:443 "GET /info?dataset=ucinlp/drop HTTP/1.1" 200 None
+2026-09-19 21:11:29 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-19 21:11:30 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/tree/95cda593fae71b60b5b19f82de3fcf3298c1239c/data?recursive=True&expand=False HTTP/1.1" 200 636
+2026-09-19 21:11:30 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/tree/95cda593fae71b60b5b19f82de3fcf3298c1239c?recursive=False&expand=False HTTP/1.1" 200 291
+2026-09-19 21:11:30 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-19 21:11:30 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-19 21:11:30 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-19 21:11:31 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-19 21:11:31 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/95cda593fae71b60b5b19f82de3fcf3298c1239c/dataset_infos.json HTTP/1.1" 404 0
+2026-09-19 21:11:31 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-19 21:11:32 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-19 21:11:32 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-19 21:11:32 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-19 21:11:32 DEBUG: Attempting to acquire lock 2311339642000 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-19 21:11:32 DEBUG: Lock 2311339642000 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-19 21:11:32 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/ucinlp___drop/default/0.0.0/95cda593fae71b60b5b19f82de3fcf3298c1239c/dataset_info.json
+2026-09-19 21:11:32 DEBUG: Attempting to release lock 2311339642000 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-19 21:11:32 DEBUG: Lock 2311339642000 released on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-19 21:11:32 DEBUG: Attempting to acquire lock 2311344350416 on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-19 21:11:32 DEBUG: Lock 2311344350416 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-19 21:11:32 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/ucinlp___drop/default/0.0.0/95cda593fae71b60b5b19f82de3fcf3298c1239c/dataset_info.json
+2026-09-19 21:11:32 DEBUG: Attempting to release lock 2311344350416 on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-19 21:11:32 DEBUG: Lock 2311344350416 released on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-19 21:12:02 INFO: Constructing and tokenizing drop with test split...
+2026-09-19 21:12:16 DEBUG: Tokenizing inputs
+2026-09-19 21:12:17 INFO: Tokenizing 9535 messages...
+2026-09-19 21:12:18 DEBUG: open file: C:/Users/caotranbadat/AppData/Local/Temp/hf_datasets-cc0gna27/tmp1zv_ce8q
+2026-09-19 21:12:18 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-19 21:12:32 DEBUG: Tokenizing context
+2026-09-19 21:12:34 DEBUG: open file: C:/Users/caotranbadat/AppData/Local/Temp/hf_datasets-cc0gna27/tmph_5g2wk7
+2026-09-19 21:12:35 INFO: Chunking context with split_ctx_kwargs={'max_chunk_len': 8192, 'min_chunk_len': -1, 'num_chunk_probs': None, 'max_num_split': None, 'model_name_or_path': 'google/gemma-2-2b-it', 'is_train': False}
+2026-09-19 21:12:35 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-19 21:12:50 INFO: Num samples after ctx chunking: 9535
+2026-09-19 21:12:50 INFO: Avg. num chunks per ctx: 1.0
+2026-09-19 21:12:50 INFO: Split too long QAs with split_qa_kwargs={'max_qas_len': -1, 'max_qas_per_sample': 1}
+2026-09-19 21:12:50 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-19 21:13:05 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-19 21:13:16 DEBUG: open file: C:/Users/caotranbadat/AppData/Local/Temp/hf_datasets-cc0gna27/tmpw1aiinzf
+2026-09-19 21:13:17 DEBUG: open file: C:/Users/caotranbadat/AppData/Local/Temp/hf_datasets-cc0gna27/tmp5ih52ron
+2026-09-19 21:13:19 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/main/README.md HTTP/1.1" 307 0
+2026-09-19 21:13:19 DEBUG: https://huggingface.co:443 "HEAD /api/resolve-cache/datasets/ucinlp/drop/95cda593fae71b60b5b19f82de3fcf3298c1239c/README.md HTTP/1.1" 200 0
+2026-09-19 21:13:19 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/95cda593fae71b60b5b19f82de3fcf3298c1239c/drop.py HTTP/1.1" 404 0
+2026-09-19 21:13:19 DEBUG: Starting new HTTPS connection (2): s3.amazonaws.com:443
+2026-09-19 21:13:20 DEBUG: https://s3.amazonaws.com:443 "HEAD /datasets.huggingface.co/datasets/datasets/ucinlp/drop/ucinlp/drop.py HTTP/1.1" 404 0
+2026-09-19 21:13:20 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/95cda593fae71b60b5b19f82de3fcf3298c1239c/.huggingface.yaml HTTP/1.1" 404 0
+2026-09-19 21:13:21 DEBUG: https://datasets-server.huggingface.co:443 "GET /info?dataset=ucinlp/drop HTTP/1.1" 200 None
+2026-09-19 21:13:21 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-19 21:13:21 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-19 21:13:21 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-19 21:13:22 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-19 21:13:22 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/95cda593fae71b60b5b19f82de3fcf3298c1239c/dataset_infos.json HTTP/1.1" 404 0
+2026-09-19 21:13:22 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-19 21:13:23 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-19 21:13:23 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-19 21:13:23 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-19 21:13:23 DEBUG: Attempting to acquire lock 2311261089488 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-19 21:13:23 DEBUG: Lock 2311261089488 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-19 21:13:23 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/ucinlp___drop/default/0.0.0/95cda593fae71b60b5b19f82de3fcf3298c1239c/dataset_info.json
+2026-09-19 21:13:23 DEBUG: Attempting to release lock 2311261089488 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-19 21:13:23 DEBUG: Lock 2311261089488 released on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-19 21:13:23 DEBUG: Attempting to acquire lock 2311320950928 on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-19 21:13:23 DEBUG: Lock 2311320950928 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-19 21:13:23 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/ucinlp___drop/default/0.0.0/95cda593fae71b60b5b19f82de3fcf3298c1239c/dataset_info.json
+2026-09-19 21:13:23 DEBUG: Attempting to release lock 2311320950928 on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-19 21:13:23 DEBUG: Lock 2311320950928 released on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-19 21:13:23 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-19 21:13:39 WARNING: Using attention mask for resampler
+2026-09-19 23:43:03 DEBUG: Using proactor: IocpProactor

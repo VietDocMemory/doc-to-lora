@@ -1,0 +1,14 @@
+model_name,group_len,tasks,num_samples,qa_f1,qa_recall,qa_f1_score,qa_precision
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041,0-127,test_longbench/multifieldqa_en_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041,128-255,test_longbench/multifieldqa_en_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041,256-511,test_longbench/multifieldqa_en_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041,0-511,test_longbench/multifieldqa_en_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041,512-1023,test_longbench/multifieldqa_en_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041,1024-2047,test_longbench/multifieldqa_en_e,11,None,0.5395021645021645,0.6232644167426776,0.883572567783094
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041,2048-4095,test_longbench/multifieldqa_en_e,29,None,0.5160509031198687,0.5582202780027942,0.7602403343782654
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041,4096-8191,test_longbench/multifieldqa_en_e,50,None,0.33839676989676987,0.3532052553310918,0.4805110902169725
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041,0-8191,test_longbench/multifieldqa_en_e,90,None,0.4202204277204278,0.45227288236450086,0.6199091383714708
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041,8192-16383,test_longbench/multifieldqa_en_e,59,None,0.2541923809456695,0.2695543816182768,0.4323518828044382
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041,16384-32767,test_longbench/multifieldqa_en_e,1,None,1.0,1.0,1.0
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041,32768-inf,test_longbench/multifieldqa_en_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041,overall,test_longbench/multifieldqa_en_e,150,N/A,0.35878125980422,0.3840551195218894,0.5486705569259615

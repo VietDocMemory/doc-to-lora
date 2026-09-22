@@ -1,0 +1,78 @@
+2026-09-15 13:39:36 INFO: Logging to: eval_results/google/gemma-2-2b-it/20260915-133936_96e2536c/debug.log
+2026-09-15 13:39:36 DEBUG: CMD: run_eval.py --model_name_or_path google/gemma-2-2b-it --datasets drop --split test --max_test_samples_per_ds -1 --eval_batch_size_gen 1 --max_new_tokens 128
+2026-09-15 13:39:36 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 13:39:37 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2026-09-15 13:39:38 INFO: Using chat template from chat_templates/google/gemma-2-2b-it.jinja
+2026-09-15 13:39:38 DEBUG: Model init kwargs: {'pretrained_model_name_or_path': 'google/gemma-2-2b-it', 'device_map': 'cuda', 'torch_dtype': torch.bfloat16, 'trust_remote_code': True, 'attn_implementation': 'eager', 'use_cache': None}
+2026-09-15 13:39:38 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/config.json HTTP/1.1" 200 0
+2026-09-15 13:39:42 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/generation_config.json HTTP/1.1" 200 0
+2026-09-15 13:39:42 INFO: Loading dataset drop with split test...
+2026-09-15 13:39:42 DEBUG: Tokenizing dataset with kwargs: {"ds_name": "drop", "split": "test", "add_negative_prompt": false, "max_qas_len": -1, "max_qas_per_sample": 1, "base_model_max_len": 8192, "ctx_model_max_len": null, "add_ctx_to_chat": true, "max_ctx_chunk_len": -1, "min_ctx_chunk_len": -1, "num_chunk_probs": null, "max_ctx_chunk_num": null, "need_ctx_ids": false, "max_new_tokens": 128, "set_format": "pt"}google/gemma-2-2b-itgoogle/gemma-2-2b-it
+2026-09-15 13:39:42 DEBUG: Dataset hash: a5ce8eaf5edea67cd1df6704bcb2054ec1cbf398493e1814e76702f68a300aed
+2026-09-15 13:39:42 INFO: Loading dataset drop with split test...
+2026-09-15 13:39:42 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/main/README.md HTTP/1.1" 307 0
+2026-09-15 13:39:42 DEBUG: https://huggingface.co:443 "HEAD /api/resolve-cache/datasets/ucinlp/drop/95cda593fae71b60b5b19f82de3fcf3298c1239c/README.md HTTP/1.1" 200 0
+2026-09-15 13:39:43 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/95cda593fae71b60b5b19f82de3fcf3298c1239c/drop.py HTTP/1.1" 404 0
+2026-09-15 13:39:43 DEBUG: Starting new HTTPS connection (1): s3.amazonaws.com:443
+2026-09-15 13:39:44 DEBUG: https://s3.amazonaws.com:443 "HEAD /datasets.huggingface.co/datasets/datasets/ucinlp/drop/ucinlp/drop.py HTTP/1.1" 404 0
+2026-09-15 13:39:44 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-15 13:39:44 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/95cda593fae71b60b5b19f82de3fcf3298c1239c/.huggingface.yaml HTTP/1.1" 404 0
+2026-09-15 13:39:44 DEBUG: Starting new HTTPS connection (1): datasets-server.huggingface.co:443
+2026-09-15 13:39:45 DEBUG: https://datasets-server.huggingface.co:443 "GET /info?dataset=ucinlp/drop HTTP/1.1" 200 None
+2026-09-15 13:39:45 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-15 13:39:46 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/tree/95cda593fae71b60b5b19f82de3fcf3298c1239c/data?recursive=True&expand=False HTTP/1.1" 200 636
+2026-09-15 13:39:46 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/tree/95cda593fae71b60b5b19f82de3fcf3298c1239c?recursive=False&expand=False HTTP/1.1" 200 291
+2026-09-15 13:39:46 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 13:39:46 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-15 13:39:46 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 13:39:47 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-15 13:39:47 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/95cda593fae71b60b5b19f82de3fcf3298c1239c/dataset_infos.json HTTP/1.1" 404 0
+2026-09-15 13:39:47 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 13:39:48 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-15 13:39:48 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 13:39:48 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-15 13:39:48 DEBUG: Attempting to acquire lock 1577298378896 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-15 13:39:48 DEBUG: Lock 1577298378896 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-15 13:39:48 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/ucinlp___drop/default/0.0.0/95cda593fae71b60b5b19f82de3fcf3298c1239c/dataset_info.json
+2026-09-15 13:39:48 DEBUG: Attempting to release lock 1577298378896 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-15 13:39:48 DEBUG: Lock 1577298378896 released on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-15 13:39:48 DEBUG: Attempting to acquire lock 1577280470032 on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-15 13:39:48 DEBUG: Lock 1577280470032 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-15 13:39:48 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/ucinlp___drop/default/0.0.0/95cda593fae71b60b5b19f82de3fcf3298c1239c/dataset_info.json
+2026-09-15 13:39:48 DEBUG: Attempting to release lock 1577280470032 on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-15 13:39:48 DEBUG: Lock 1577280470032 released on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-15 13:40:17 INFO: Constructing and tokenizing drop with test split...
+2026-09-15 13:40:30 DEBUG: Tokenizing inputs
+2026-09-15 13:40:30 INFO: Tokenizing 9535 messages...
+2026-09-15 13:40:32 DEBUG: open file: C:/Users/caotranbadat/AppData/Local/Temp/hf_datasets-m5jdwwq9/tmpppsdgze1
+2026-09-15 13:40:33 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-15 13:40:47 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-15 13:40:57 DEBUG: open file: C:/Users/caotranbadat/AppData/Local/Temp/hf_datasets-m5jdwwq9/tmp5v20vrfy
+2026-09-15 13:41:00 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/main/README.md HTTP/1.1" 307 0
+2026-09-15 13:41:00 DEBUG: https://huggingface.co:443 "HEAD /api/resolve-cache/datasets/ucinlp/drop/95cda593fae71b60b5b19f82de3fcf3298c1239c/README.md HTTP/1.1" 200 0
+2026-09-15 13:41:00 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/95cda593fae71b60b5b19f82de3fcf3298c1239c/drop.py HTTP/1.1" 404 0
+2026-09-15 13:41:00 DEBUG: Resetting dropped connection: s3.amazonaws.com
+2026-09-15 13:41:01 DEBUG: https://s3.amazonaws.com:443 "HEAD /datasets.huggingface.co/datasets/datasets/ucinlp/drop/ucinlp/drop.py HTTP/1.1" 404 0
+2026-09-15 13:41:01 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/95cda593fae71b60b5b19f82de3fcf3298c1239c/.huggingface.yaml HTTP/1.1" 404 0
+2026-09-15 13:41:02 DEBUG: https://datasets-server.huggingface.co:443 "GET /info?dataset=ucinlp/drop HTTP/1.1" 200 None
+2026-09-15 13:41:02 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 13:41:02 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-15 13:41:02 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 13:41:03 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-15 13:41:03 DEBUG: https://huggingface.co:443 "HEAD /datasets/ucinlp/drop/resolve/95cda593fae71b60b5b19f82de3fcf3298c1239c/dataset_infos.json HTTP/1.1" 404 0
+2026-09-15 13:41:03 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 13:41:04 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-15 13:41:04 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 13:41:04 DEBUG: https://huggingface.co:443 "GET /api/datasets/ucinlp/drop/revision/95cda593fae71b60b5b19f82de3fcf3298c1239c HTTP/1.1" 200 None
+2026-09-15 13:41:04 DEBUG: Attempting to acquire lock 1577277472464 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-15 13:41:04 DEBUG: Lock 1577277472464 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-15 13:41:04 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/ucinlp___drop/default/0.0.0/95cda593fae71b60b5b19f82de3fcf3298c1239c/dataset_info.json
+2026-09-15 13:41:04 DEBUG: Attempting to release lock 1577277472464 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-15 13:41:04 DEBUG: Lock 1577277472464 released on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_ucinlp___drop_default_0.0.0_95cda593fae71b60b5b19f82de3fcf3298c1239c.lock
+2026-09-15 13:41:04 DEBUG: Attempting to acquire lock 1577297979024 on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-15 13:41:04 DEBUG: Lock 1577297979024 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-15 13:41:04 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/ucinlp___drop/default/0.0.0/95cda593fae71b60b5b19f82de3fcf3298c1239c/dataset_info.json
+2026-09-15 13:41:04 DEBUG: Attempting to release lock 1577297979024 on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-15 13:41:04 DEBUG: Lock 1577297979024 released on C:\Users\caotranbadat\.cache\huggingface\datasets\ucinlp___drop\default\0.0.0\95cda593fae71b60b5b19f82de3fcf3298c1239c_builder.lock
+2026-09-15 13:41:04 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-15 15:20:11 DEBUG: Using proactor: IocpProactor

@@ -1,0 +1,14 @@
+model_name,group_len,tasks,num_samples,qa_f1,qa_precision,qa_recall,qa_f1_score
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-162055_61083939,0-127,test_longbench/2wikimqa_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-162055_61083939,128-255,test_longbench/2wikimqa_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-162055_61083939,256-511,test_longbench/2wikimqa_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-162055_61083939,0-511,test_longbench/2wikimqa_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-162055_61083939,512-1023,test_longbench/2wikimqa_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-162055_61083939,1024-2047,test_longbench/2wikimqa_e,2,None,0.0,0.0,0.0
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-162055_61083939,2048-4095,test_longbench/2wikimqa_e,22,None,0.5681818181818182,0.5681818181818182,0.5681818181818182
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-162055_61083939,4096-8191,test_longbench/2wikimqa_e,135,None,0.4120987654320988,0.40802469135802466,0.4055908289241622
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-162055_61083939,0-8191,test_longbench/2wikimqa_e,159,None,0.4285115303983228,0.42505241090146745,0.42298592392932005
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-162055_61083939,8192-16383,test_longbench/2wikimqa_e,125,None,0.26293333333333335,0.2773333333333333,0.26639682539682535
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-162055_61083939,16384-32767,test_longbench/2wikimqa_e,16,None,0.19270833333333331,0.23125,0.2013888888888889
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-162055_61083939,32768-inf,test_longbench/2wikimqa_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-162055_61083939,overall,test_longbench/2wikimqa_e,300,N/A,0.34694444444444444,0.35316666666666663,0.3459219576719576

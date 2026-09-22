@@ -1,0 +1,14 @@
+model_name,group_len,tasks,num_samples,qa_f1,qa_f1_score,qa_precision,qa_recall
+gemma-2-2b-it_gemma_demo,0-127,test_longbench/qasper_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_gemma_demo,128-255,test_longbench/qasper_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_gemma_demo,256-511,test_longbench/qasper_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_gemma_demo,0-511,test_longbench/qasper_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_gemma_demo,512-1023,test_longbench/qasper_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_gemma_demo,1024-2047,test_longbench/qasper_e,2,None,0.5,0.5,0.5
+gemma-2-2b-it_gemma_demo,2048-4095,test_longbench/qasper_e,50,None,0.20927436210288738,0.2640611483459781,0.2131617521002383
+gemma-2-2b-it_gemma_demo,4096-8191,test_longbench/qasper_e,140,None,0.17787708002061775,0.2345988316856776,0.17018820685015673
+gemma-2-2b-it_gemma_demo,0-8191,test_longbench/qasper_e,192,None,0.18940890264599405,0.24503590548590504,0.18481477377100966
+gemma-2-2b-it_gemma_demo,8192-16383,test_longbench/qasper_e,18,None,0.1394219977553311,0.1531144781144781,0.13892496392496392
+gemma-2-2b-it_gemma_demo,16384-32767,test_longbench/qasper_e,14,None,0.1586944311660514,0.17536929665483214,0.1842927083660363
+gemma-2-2b-it_gemma_demo,32768-inf,test_longbench/qasper_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_gemma_demo,overall,test_longbench/qasper_e,224,N/A,0.1834724433212122,0.23329519916304478,0.181094570677713

@@ -27,7 +27,7 @@ plots/
 *.safetensors
 *tfevents*
 watcher_state.yaml
-eval_results/
+# eval_results/
 .github/
 *.code-workspace
 .wandb/

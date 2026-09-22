@@ -1,0 +1,91 @@
+2026-09-15 15:28:04 INFO: Logging to: eval_results/google/gemma-2-2b-it/20260915-152804_8f943afc/debug.log
+2026-09-15 15:28:04 DEBUG: CMD: run_eval.py --model_name_or_path google/gemma-2-2b-it --datasets ropes --split test --max_test_samples_per_ds -1 --eval_batch_size_gen 1 --max_new_tokens 128
+2026-09-15 15:28:04 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 15:28:04 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2026-09-15 15:28:05 INFO: Using chat template from chat_templates/google/gemma-2-2b-it.jinja
+2026-09-15 15:28:05 DEBUG: Model init kwargs: {'pretrained_model_name_or_path': 'google/gemma-2-2b-it', 'device_map': 'cuda', 'torch_dtype': torch.bfloat16, 'trust_remote_code': True, 'attn_implementation': 'eager', 'use_cache': None}
+2026-09-15 15:28:06 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/config.json HTTP/1.1" 200 0
+2026-09-15 15:28:09 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/generation_config.json HTTP/1.1" 200 0
+2026-09-15 15:28:09 INFO: Loading dataset ropes with split test...
+2026-09-15 15:28:09 DEBUG: Tokenizing dataset with kwargs: {"ds_name": "ropes", "split": "test", "add_negative_prompt": false, "max_qas_len": -1, "max_qas_per_sample": 1, "base_model_max_len": 8192, "ctx_model_max_len": null, "add_ctx_to_chat": true, "max_ctx_chunk_len": -1, "min_ctx_chunk_len": -1, "num_chunk_probs": null, "max_ctx_chunk_num": null, "need_ctx_ids": false, "max_new_tokens": 128, "set_format": "pt"}google/gemma-2-2b-itgoogle/gemma-2-2b-it
+2026-09-15 15:28:09 DEBUG: Dataset hash: 3a8203b0f9d8634932d6f4f7d8c39c6dee8a64bec2afe9eb16f7bb3eb900c126
+2026-09-15 15:28:09 INFO: Loading dataset ropes with split test...
+2026-09-15 15:28:10 DEBUG: https://huggingface.co:443 "HEAD /datasets/allenai/ropes/resolve/main/README.md HTTP/1.1" 307 0
+2026-09-15 15:28:10 DEBUG: https://huggingface.co:443 "HEAD /api/resolve-cache/datasets/allenai/ropes/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd/README.md HTTP/1.1" 200 0
+2026-09-15 15:28:10 DEBUG: Attempting to acquire lock 2854554352848 on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\e53b51e1ccacac0e132fab8e7383d8472d2837b8.lock
+2026-09-15 15:28:10 DEBUG: Lock 2854554352848 acquired on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\e53b51e1ccacac0e132fab8e7383d8472d2837b8.lock
+2026-09-15 15:28:10 DEBUG: https://huggingface.co:443 "GET /api/resolve-cache/datasets/allenai/ropes/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd/README.md HTTP/1.1" 200 None
+2026-09-15 15:28:10 DEBUG: Attempting to release lock 2854554352848 on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\e53b51e1ccacac0e132fab8e7383d8472d2837b8.lock
+2026-09-15 15:28:10 DEBUG: Lock 2854554352848 released on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\e53b51e1ccacac0e132fab8e7383d8472d2837b8.lock
+2026-09-15 15:28:11 DEBUG: https://huggingface.co:443 "HEAD /datasets/allenai/ropes/resolve/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd/ropes.py HTTP/1.1" 404 0
+2026-09-15 15:28:11 DEBUG: Starting new HTTPS connection (1): s3.amazonaws.com:443
+2026-09-15 15:28:12 DEBUG: https://s3.amazonaws.com:443 "HEAD /datasets.huggingface.co/datasets/datasets/allenai/ropes/allenai/ropes.py HTTP/1.1" 404 0
+2026-09-15 15:28:12 DEBUG: https://huggingface.co:443 "GET /api/datasets/allenai/ropes/revision/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd HTTP/1.1" 200 None
+2026-09-15 15:28:12 DEBUG: https://huggingface.co:443 "HEAD /datasets/allenai/ropes/resolve/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd/.huggingface.yaml HTTP/1.1" 404 0
+2026-09-15 15:28:12 DEBUG: Starting new HTTPS connection (1): datasets-server.huggingface.co:443
+2026-09-15 15:28:13 DEBUG: https://datasets-server.huggingface.co:443 "GET /info?dataset=allenai/ropes HTTP/1.1" 200 None
+2026-09-15 15:28:13 DEBUG: https://huggingface.co:443 "GET /api/datasets/allenai/ropes/revision/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd HTTP/1.1" 200 None
+2026-09-15 15:28:14 DEBUG: https://huggingface.co:443 "GET /api/datasets/allenai/ropes/tree/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd/plain_text?recursive=True&expand=False HTTP/1.1" 200 961
+2026-09-15 15:28:14 DEBUG: https://huggingface.co:443 "GET /api/datasets/allenai/ropes/tree/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd?recursive=False&expand=False HTTP/1.1" 200 297
+2026-09-15 15:28:14 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 15:28:14 DEBUG: https://huggingface.co:443 "GET /api/datasets/allenai/ropes/revision/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd HTTP/1.1" 200 None
+2026-09-15 15:28:14 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 15:28:15 DEBUG: https://huggingface.co:443 "GET /api/datasets/allenai/ropes/revision/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd HTTP/1.1" 200 None
+2026-09-15 15:28:15 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 15:28:15 DEBUG: https://huggingface.co:443 "GET /api/datasets/allenai/ropes/revision/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd HTTP/1.1" 200 None
+2026-09-15 15:28:16 DEBUG: https://huggingface.co:443 "HEAD /datasets/allenai/ropes/resolve/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd/dataset_infos.json HTTP/1.1" 404 0
+2026-09-15 15:28:16 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 15:28:16 DEBUG: https://huggingface.co:443 "GET /api/datasets/allenai/ropes/revision/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd HTTP/1.1" 200 None
+2026-09-15 15:28:16 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 15:28:17 DEBUG: https://huggingface.co:443 "GET /api/datasets/allenai/ropes/revision/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd HTTP/1.1" 200 None
+2026-09-15 15:28:17 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 15:28:17 DEBUG: https://huggingface.co:443 "GET /api/datasets/allenai/ropes/revision/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd HTTP/1.1" 200 None
+2026-09-15 15:28:17 DEBUG: Attempting to acquire lock 2854553858960 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_allenai___ropes_plain_text_0.0.0_d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd.lock
+2026-09-15 15:28:17 DEBUG: Lock 2854553858960 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_allenai___ropes_plain_text_0.0.0_d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd.lock
+2026-09-15 15:28:17 DEBUG: Attempting to release lock 2854553858960 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_allenai___ropes_plain_text_0.0.0_d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd.lock
+2026-09-15 15:28:17 DEBUG: Lock 2854553858960 released on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_allenai___ropes_plain_text_0.0.0_d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd.lock
+2026-09-15 15:28:17 DEBUG: Attempting to acquire lock 2854554482256 on C:\Users\caotranbadat\.cache\huggingface\datasets\allenai___ropes\plain_text\0.0.0\d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd_builder.lock
+2026-09-15 15:28:17 DEBUG: Lock 2854554482256 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\allenai___ropes\plain_text\0.0.0\d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd_builder.lock
+2026-09-15 15:28:18 DEBUG: https://huggingface.co:443 "HEAD /datasets/allenai/ropes/resolve/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd/plain_text/train-00000-of-00001.parquet HTTP/1.1" 302 0
+2026-09-15 15:28:18 DEBUG: Attempting to acquire lock 2854553655056 on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\5dd4781f69556326f366989e1e5df6603b43269388d5c2e22e0a7229c08df687.lock
+2026-09-15 15:28:18 DEBUG: Lock 2854553655056 acquired on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\5dd4781f69556326f366989e1e5df6603b43269388d5c2e22e0a7229c08df687.lock
+2026-09-15 15:28:18 WARNING: Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2026-09-15 15:28:18 DEBUG: https://huggingface.co:443 "GET /datasets/allenai/ropes/resolve/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd/plain_text/train-00000-of-00001.parquet HTTP/1.1" 302 1116
+2026-09-15 15:28:18 DEBUG: Starting new HTTPS connection (1): us.aws.cdn.hf.co:443
+2026-09-15 15:28:19 DEBUG: https://us.aws.cdn.hf.co:443 "GET /xet-bridge-us/621ffdd236468d709f181f5e/d012a564578c4a35c442df114fd22135df5cf486aeb62e37782b62b9d5dd8dd0?X-Xet-Cas-Uid=6a62e98c2c9b97259e2ace0a&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27train-00000-of-00001.parquet%3B+filename%3D%22train-00000-of-00001.parquet%22%3B&user_id=6a62e98c2c9b97259e2ace0a&Expires=1789464541&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy5hd3MuY2RuLmhmLmNvL3hldC1icmlkZ2UtdXMvNjIxZmZkZDIzNjQ2OGQ3MDlmMTgxZjVlL2QwMTJhNTY0NTc4YzRhMzVjNDQyZGYxMTRmZDIyMTM1ZGY1Y2Y0ODZhZWI2MmUzNzc4MmI2MmI5ZDVkZDhkZDBcXD9YLVhldC1DYXMtVWlkPTZhNjJlOThjMmM5Yjk3MjU5ZTJhY2UwYSZyZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPWlubGluZSUzQitmaWxlbmFtZSUyQSUzRFVURi04JTI3JTI3dHJhaW4tMDAwMDAtb2YtMDAwMDEucGFycXVldCUzQitmaWxlbmFtZSUzRCUyMnRyYWluLTAwMDAwLW9mLTAwMDAxLnBhcnF1ZXQlMjIlM0ImdXNlcl9pZD02YTYyZTk4YzJjOWI5NzI1OWUyYWNlMGEiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkVwb2NoVGltZSI6MTc4OTQ2NDU0MX19fV19&Signature=MEUCIANmN6yHmIPkLSR9MrYXTQU~e9ELwvC6WETt9naoMS90AiEA7J6leqXY5NZwoT8nnpOHPe-l35WUx--FPwcCoSf0fAM_&Key-Pair-Id=01KXEF4KZ1B6FV465MAWR4M21F HTTP/1.1" 200 1063606
+2026-09-15 15:28:19 DEBUG: Attempting to release lock 2854553655056 on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\5dd4781f69556326f366989e1e5df6603b43269388d5c2e22e0a7229c08df687.lock
+2026-09-15 15:28:19 DEBUG: Lock 2854553655056 released on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\5dd4781f69556326f366989e1e5df6603b43269388d5c2e22e0a7229c08df687.lock
+2026-09-15 15:28:20 DEBUG: https://huggingface.co:443 "HEAD /datasets/allenai/ropes/resolve/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd/plain_text/test-00000-of-00001.parquet HTTP/1.1" 302 0
+2026-09-15 15:28:20 DEBUG: Attempting to acquire lock 2854553664080 on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\95b2ae3c1403b56a8e6a9250ccf7b0667b4c1b82b68694050654b142f5e868a6.lock
+2026-09-15 15:28:20 DEBUG: Lock 2854553664080 acquired on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\95b2ae3c1403b56a8e6a9250ccf7b0667b4c1b82b68694050654b142f5e868a6.lock
+2026-09-15 15:28:20 WARNING: Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2026-09-15 15:28:20 DEBUG: https://huggingface.co:443 "GET /datasets/allenai/ropes/resolve/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd/plain_text/test-00000-of-00001.parquet HTTP/1.1" 302 1116
+2026-09-15 15:28:20 DEBUG: https://us.aws.cdn.hf.co:443 "GET /xet-bridge-us/621ffdd236468d709f181f5e/716f4ff2d274773e5c2ffbcc46f9270702dca8470b253bee2bbd03fdb7f94fec?user_id=6a62e98c2c9b97259e2ace0a&X-Xet-Cas-Uid=6a62e98c2c9b97259e2ace0a&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27test-00000-of-00001.parquet%3B+filename%3D%22test-00000-of-00001.parquet%22%3B&Expires=1789464543&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy5hd3MuY2RuLmhmLmNvL3hldC1icmlkZ2UtdXMvNjIxZmZkZDIzNjQ2OGQ3MDlmMTgxZjVlLzcxNmY0ZmYyZDI3NDc3M2U1YzJmZmJjYzQ2ZjkyNzA3MDJkY2E4NDcwYjI1M2JlZTJiYmQwM2ZkYjdmOTRmZWNcXD91c2VyX2lkPTZhNjJlOThjMmM5Yjk3MjU5ZTJhY2UwYSZYLVhldC1DYXMtVWlkPTZhNjJlOThjMmM5Yjk3MjU5ZTJhY2UwYSZyZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPWlubGluZSUzQitmaWxlbmFtZSUyQSUzRFVURi04JTI3JTI3dGVzdC0wMDAwMC1vZi0wMDAwMS5wYXJxdWV0JTNCK2ZpbGVuYW1lJTNEJTIydGVzdC0wMDAwMC1vZi0wMDAwMS5wYXJxdWV0JTIyJTNCIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJFcG9jaFRpbWUiOjE3ODk0NjQ1NDN9fX1dfQ__&Signature=MEYCIQCptRbmOhDBebzEzgsT7h-AVY-Au4PSifiqQRgstdomtwIhALCxp7kfY0XYjGz5QDr~XWEhlhu~MZOibNoPZN3okYAm&Key-Pair-Id=01KXEF4KZ1B6FV465MAWR4M21F HTTP/1.1" 200 199757
+2026-09-15 15:28:21 DEBUG: Attempting to release lock 2854553664080 on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\95b2ae3c1403b56a8e6a9250ccf7b0667b4c1b82b68694050654b142f5e868a6.lock
+2026-09-15 15:28:21 DEBUG: Lock 2854553664080 released on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\95b2ae3c1403b56a8e6a9250ccf7b0667b4c1b82b68694050654b142f5e868a6.lock
+2026-09-15 15:28:21 DEBUG: https://huggingface.co:443 "HEAD /datasets/allenai/ropes/resolve/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd/plain_text/validation-00000-of-00001.parquet HTTP/1.1" 302 0
+2026-09-15 15:28:21 DEBUG: Attempting to acquire lock 2854554114960 on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\5ad558e4089cbc1c0014fcd72f2bdfa3271d0a2ab04d19823ebba927323b6e26.lock
+2026-09-15 15:28:21 DEBUG: Lock 2854554114960 acquired on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\5ad558e4089cbc1c0014fcd72f2bdfa3271d0a2ab04d19823ebba927323b6e26.lock
+2026-09-15 15:28:21 WARNING: Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2026-09-15 15:28:21 DEBUG: https://huggingface.co:443 "GET /datasets/allenai/ropes/resolve/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd/plain_text/validation-00000-of-00001.parquet HTTP/1.1" 302 1144
+2026-09-15 15:28:22 DEBUG: https://us.aws.cdn.hf.co:443 "GET /xet-bridge-us/621ffdd236468d709f181f5e/91d864806fefaca65c17387ad11ac5c541456b45bc32bec0e9ed533f5efc81eb?response-content-disposition=inline%3B+filename*%3DUTF-8%27%27validation-00000-of-00001.parquet%3B+filename%3D%22validation-00000-of-00001.parquet%22%3B&X-Xet-Cas-Uid=6a62e98c2c9b97259e2ace0a&user_id=6a62e98c2c9b97259e2ace0a&Expires=1789464545&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy5hd3MuY2RuLmhmLmNvL3hldC1icmlkZ2UtdXMvNjIxZmZkZDIzNjQ2OGQ3MDlmMTgxZjVlLzkxZDg2NDgwNmZlZmFjYTY1YzE3Mzg3YWQxMWFjNWM1NDE0NTZiNDViYzMyYmVjMGU5ZWQ1MzNmNWVmYzgxZWJcXD9yZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPWlubGluZSUzQitmaWxlbmFtZSUyQSUzRFVURi04JTI3JTI3dmFsaWRhdGlvbi0wMDAwMC1vZi0wMDAwMS5wYXJxdWV0JTNCK2ZpbGVuYW1lJTNEJTIydmFsaWRhdGlvbi0wMDAwMC1vZi0wMDAwMS5wYXJxdWV0JTIyJTNCJlgtWGV0LUNhcy1VaWQ9NmE2MmU5OGMyYzliOTcyNTllMmFjZTBhJnVzZXJfaWQ9NmE2MmU5OGMyYzliOTcyNTllMmFjZTBhIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJFcG9jaFRpbWUiOjE3ODk0NjQ1NDV9fX1dfQ__&Signature=MEUCIQDPyNUFbxZYpcunvVqOfRHrqz-3-cnQj~ygAF~3gh0BzwIgckgVALdxW0LSBWAeA8n51aDUV77AzMuG4jefe9DBJ2E_&Key-Pair-Id=01KXEF4KZ1B6FV465MAWR4M21F HTTP/1.1" 200 109185
+2026-09-15 15:28:22 DEBUG: Attempting to release lock 2854554114960 on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\5ad558e4089cbc1c0014fcd72f2bdfa3271d0a2ab04d19823ebba927323b6e26.lock
+2026-09-15 15:28:22 DEBUG: Lock 2854554114960 released on C:\Users\caotranbadat\.cache\huggingface\hub\.locks\datasets--allenai--ropes\5ad558e4089cbc1c0014fcd72f2bdfa3271d0a2ab04d19823ebba927323b6e26.lock
+2026-09-15 15:28:22 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/allenai___ropes/plain_text/0.0.0/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd.incomplete/ropes-train-00000-00000-of-NNNNN.arrow
+2026-09-15 15:28:22 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/allenai___ropes/plain_text/0.0.0/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd.incomplete/ropes-test-00000-00000-of-NNNNN.arrow
+2026-09-15 15:28:22 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/allenai___ropes/plain_text/0.0.0/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd.incomplete/ropes-validation-00000-00000-of-NNNNN.arrow
+2026-09-15 15:28:22 DEBUG: Attempting to acquire lock 2854555752784 on C:\Users\caotranbadat\.cache\huggingface\datasets\allenai___ropes\plain_text\0.0.0\d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd.incomplete_info.lock
+2026-09-15 15:28:22 DEBUG: Lock 2854555752784 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\allenai___ropes\plain_text\0.0.0\d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd.incomplete_info.lock
+2026-09-15 15:28:22 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/allenai___ropes/plain_text/0.0.0/d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd.incomplete/dataset_info.json
+2026-09-15 15:28:22 DEBUG: Attempting to release lock 2854555752784 on C:\Users\caotranbadat\.cache\huggingface\datasets\allenai___ropes\plain_text\0.0.0\d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd.incomplete_info.lock
+2026-09-15 15:28:22 DEBUG: Lock 2854555752784 released on C:\Users\caotranbadat\.cache\huggingface\datasets\allenai___ropes\plain_text\0.0.0\d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd.incomplete_info.lock
+2026-09-15 15:28:22 DEBUG: Attempting to release lock 2854554482256 on C:\Users\caotranbadat\.cache\huggingface\datasets\allenai___ropes\plain_text\0.0.0\d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd_builder.lock
+2026-09-15 15:28:22 DEBUG: Lock 2854554482256 released on C:\Users\caotranbadat\.cache\huggingface\datasets\allenai___ropes\plain_text\0.0.0\d59f1e2ee2b423d7c6ba71edd47fceb4158b07dd_builder.lock
+2026-09-15 15:28:51 INFO: Constructing and tokenizing ropes with test split...
+2026-09-15 15:29:04 DEBUG: Tokenizing inputs
+2026-09-15 15:29:05 INFO: Tokenizing 1688 messages...
+2026-09-15 15:29:05 DEBUG: open file: C:/Users/caotranbadat/AppData/Local/Temp/hf_datasets-j32_ixl8/tmp0lb4lk48
+2026-09-15 15:29:05 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-15 15:29:18 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-15 15:29:28 DEBUG: open file: C:/Users/caotranbadat/AppData/Local/Temp/hf_datasets-j32_ixl8/tmp7w5dgsnf
+2026-09-15 15:40:28 DEBUG: Using proactor: IocpProactor

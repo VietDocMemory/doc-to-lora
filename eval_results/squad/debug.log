@@ -1,0 +1,78 @@
+2026-09-15 11:32:00 INFO: Logging to: eval_results/google/gemma-2-2b-it/20260915-113200_1575ccd5/debug.log
+2026-09-15 11:32:00 DEBUG: CMD: run_eval.py --model_name_or_path google/gemma-2-2b-it --datasets squad --split test --max_test_samples_per_ds -1 --eval_batch_size_gen 1 --max_new_tokens 128
+2026-09-15 11:32:00 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 11:32:00 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2026-09-15 11:32:02 INFO: Using chat template from chat_templates/google/gemma-2-2b-it.jinja
+2026-09-15 11:32:02 DEBUG: Model init kwargs: {'pretrained_model_name_or_path': 'google/gemma-2-2b-it', 'device_map': 'cuda', 'torch_dtype': torch.bfloat16, 'trust_remote_code': True, 'attn_implementation': 'eager', 'use_cache': None}
+2026-09-15 11:32:02 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/config.json HTTP/1.1" 200 0
+2026-09-15 11:32:06 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/generation_config.json HTTP/1.1" 200 0
+2026-09-15 11:32:06 INFO: Loading dataset squad with split test...
+2026-09-15 11:32:06 DEBUG: Tokenizing dataset with kwargs: {"ds_name": "squad", "split": "test", "add_negative_prompt": false, "max_qas_len": -1, "max_qas_per_sample": 1, "base_model_max_len": 8192, "ctx_model_max_len": null, "add_ctx_to_chat": true, "max_ctx_chunk_len": -1, "min_ctx_chunk_len": -1, "num_chunk_probs": null, "max_ctx_chunk_num": null, "need_ctx_ids": false, "max_new_tokens": 128, "set_format": "pt"}google/gemma-2-2b-itgoogle/gemma-2-2b-it
+2026-09-15 11:32:06 DEBUG: Dataset hash: 0b26088f28a76df373369a455cebaec10aae36bc52df2025bed02ae878602fec
+2026-09-15 11:32:06 INFO: Loading dataset squad with split test...
+2026-09-15 11:32:06 DEBUG: https://huggingface.co:443 "HEAD /datasets/rajpurkar/squad/resolve/main/README.md HTTP/1.1" 307 0
+2026-09-15 11:32:06 DEBUG: https://huggingface.co:443 "HEAD /api/resolve-cache/datasets/rajpurkar/squad/7b6d24c440a36b6815f21b70d25016731768db1f/README.md HTTP/1.1" 200 0
+2026-09-15 11:32:06 DEBUG: https://huggingface.co:443 "HEAD /datasets/rajpurkar/squad/resolve/7b6d24c440a36b6815f21b70d25016731768db1f/squad.py HTTP/1.1" 404 0
+2026-09-15 11:32:07 DEBUG: Starting new HTTPS connection (1): s3.amazonaws.com:443
+2026-09-15 11:32:09 DEBUG: https://s3.amazonaws.com:443 "HEAD /datasets.huggingface.co/datasets/datasets/rajpurkar/squad/rajpurkar/squad.py HTTP/1.1" 404 0
+2026-09-15 11:32:09 DEBUG: https://huggingface.co:443 "GET /api/datasets/rajpurkar/squad/revision/7b6d24c440a36b6815f21b70d25016731768db1f HTTP/1.1" 200 None
+2026-09-15 11:32:09 DEBUG: https://huggingface.co:443 "HEAD /datasets/rajpurkar/squad/resolve/7b6d24c440a36b6815f21b70d25016731768db1f/.huggingface.yaml HTTP/1.1" 404 0
+2026-09-15 11:32:09 DEBUG: Starting new HTTPS connection (1): datasets-server.huggingface.co:443
+2026-09-15 11:32:10 DEBUG: https://datasets-server.huggingface.co:443 "GET /info?dataset=rajpurkar/squad HTTP/1.1" 200 None
+2026-09-15 11:32:10 DEBUG: https://huggingface.co:443 "GET /api/datasets/rajpurkar/squad/revision/7b6d24c440a36b6815f21b70d25016731768db1f HTTP/1.1" 200 None
+2026-09-15 11:32:11 DEBUG: https://huggingface.co:443 "GET /api/datasets/rajpurkar/squad/tree/7b6d24c440a36b6815f21b70d25016731768db1f/plain_text?recursive=True&expand=False HTTP/1.1" 200 648
+2026-09-15 11:32:11 DEBUG: https://huggingface.co:443 "GET /api/datasets/rajpurkar/squad/tree/7b6d24c440a36b6815f21b70d25016731768db1f?recursive=False&expand=False HTTP/1.1" 200 297
+2026-09-15 11:32:11 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 11:32:12 DEBUG: https://huggingface.co:443 "GET /api/datasets/rajpurkar/squad/revision/7b6d24c440a36b6815f21b70d25016731768db1f HTTP/1.1" 200 None
+2026-09-15 11:32:12 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 11:32:12 DEBUG: https://huggingface.co:443 "GET /api/datasets/rajpurkar/squad/revision/7b6d24c440a36b6815f21b70d25016731768db1f HTTP/1.1" 200 None
+2026-09-15 11:32:12 DEBUG: https://huggingface.co:443 "HEAD /datasets/rajpurkar/squad/resolve/7b6d24c440a36b6815f21b70d25016731768db1f/dataset_infos.json HTTP/1.1" 404 0
+2026-09-15 11:32:12 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 11:32:13 DEBUG: https://huggingface.co:443 "GET /api/datasets/rajpurkar/squad/revision/7b6d24c440a36b6815f21b70d25016731768db1f HTTP/1.1" 200 None
+2026-09-15 11:32:13 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 11:32:14 DEBUG: https://huggingface.co:443 "GET /api/datasets/rajpurkar/squad/revision/7b6d24c440a36b6815f21b70d25016731768db1f HTTP/1.1" 200 None
+2026-09-15 11:32:14 DEBUG: Attempting to acquire lock 2592820393488 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_rajpurkar___squad_plain_text_0.0.0_7b6d24c440a36b6815f21b70d25016731768db1f.lock
+2026-09-15 11:32:14 DEBUG: Lock 2592820393488 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_rajpurkar___squad_plain_text_0.0.0_7b6d24c440a36b6815f21b70d25016731768db1f.lock
+2026-09-15 11:32:14 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/rajpurkar___squad/plain_text/0.0.0/7b6d24c440a36b6815f21b70d25016731768db1f/dataset_info.json
+2026-09-15 11:32:14 DEBUG: Attempting to release lock 2592820393488 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_rajpurkar___squad_plain_text_0.0.0_7b6d24c440a36b6815f21b70d25016731768db1f.lock
+2026-09-15 11:32:14 DEBUG: Lock 2592820393488 released on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_rajpurkar___squad_plain_text_0.0.0_7b6d24c440a36b6815f21b70d25016731768db1f.lock
+2026-09-15 11:32:14 DEBUG: Attempting to acquire lock 2592820358160 on C:\Users\caotranbadat\.cache\huggingface\datasets\rajpurkar___squad\plain_text\0.0.0\7b6d24c440a36b6815f21b70d25016731768db1f_builder.lock
+2026-09-15 11:32:14 DEBUG: Lock 2592820358160 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\rajpurkar___squad\plain_text\0.0.0\7b6d24c440a36b6815f21b70d25016731768db1f_builder.lock
+2026-09-15 11:32:14 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/rajpurkar___squad/plain_text/0.0.0/7b6d24c440a36b6815f21b70d25016731768db1f/dataset_info.json
+2026-09-15 11:32:14 DEBUG: Attempting to release lock 2592820358160 on C:\Users\caotranbadat\.cache\huggingface\datasets\rajpurkar___squad\plain_text\0.0.0\7b6d24c440a36b6815f21b70d25016731768db1f_builder.lock
+2026-09-15 11:32:14 DEBUG: Lock 2592820358160 released on C:\Users\caotranbadat\.cache\huggingface\datasets\rajpurkar___squad\plain_text\0.0.0\7b6d24c440a36b6815f21b70d25016731768db1f_builder.lock
+2026-09-15 11:32:41 INFO: Constructing and tokenizing squad with test split...
+2026-09-15 11:32:55 DEBUG: Tokenizing inputs
+2026-09-15 11:32:55 INFO: Tokenizing 10570 messages...
+2026-09-15 11:32:57 DEBUG: open file: C:/Users/caotranbadat/AppData/Local/Temp/hf_datasets-3o3g8vzv/tmpl5q0po7m
+2026-09-15 11:32:58 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-15 11:33:12 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-15 11:33:23 DEBUG: open file: C:/Users/caotranbadat/AppData/Local/Temp/hf_datasets-3o3g8vzv/tmpf_0xn1i6
+2026-09-15 11:33:25 DEBUG: https://huggingface.co:443 "HEAD /datasets/rajpurkar/squad/resolve/main/README.md HTTP/1.1" 307 0
+2026-09-15 11:33:25 DEBUG: https://huggingface.co:443 "HEAD /api/resolve-cache/datasets/rajpurkar/squad/7b6d24c440a36b6815f21b70d25016731768db1f/README.md HTTP/1.1" 200 0
+2026-09-15 11:33:25 DEBUG: https://huggingface.co:443 "HEAD /datasets/rajpurkar/squad/resolve/7b6d24c440a36b6815f21b70d25016731768db1f/squad.py HTTP/1.1" 404 0
+2026-09-15 11:33:25 DEBUG: Resetting dropped connection: s3.amazonaws.com
+2026-09-15 11:33:26 DEBUG: https://s3.amazonaws.com:443 "HEAD /datasets.huggingface.co/datasets/datasets/rajpurkar/squad/rajpurkar/squad.py HTTP/1.1" 404 0
+2026-09-15 11:33:26 DEBUG: https://huggingface.co:443 "HEAD /datasets/rajpurkar/squad/resolve/7b6d24c440a36b6815f21b70d25016731768db1f/.huggingface.yaml HTTP/1.1" 404 0
+2026-09-15 11:33:27 DEBUG: https://datasets-server.huggingface.co:443 "GET /info?dataset=rajpurkar/squad HTTP/1.1" 200 None
+2026-09-15 11:33:27 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 11:33:27 DEBUG: https://huggingface.co:443 "GET /api/datasets/rajpurkar/squad/revision/7b6d24c440a36b6815f21b70d25016731768db1f HTTP/1.1" 200 None
+2026-09-15 11:33:27 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 11:33:28 DEBUG: https://huggingface.co:443 "GET /api/datasets/rajpurkar/squad/revision/7b6d24c440a36b6815f21b70d25016731768db1f HTTP/1.1" 200 None
+2026-09-15 11:33:28 DEBUG: https://huggingface.co:443 "HEAD /datasets/rajpurkar/squad/resolve/7b6d24c440a36b6815f21b70d25016731768db1f/dataset_infos.json HTTP/1.1" 404 0
+2026-09-15 11:33:28 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 11:33:29 DEBUG: https://huggingface.co:443 "GET /api/datasets/rajpurkar/squad/revision/7b6d24c440a36b6815f21b70d25016731768db1f HTTP/1.1" 200 None
+2026-09-15 11:33:29 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 11:33:29 DEBUG: https://huggingface.co:443 "GET /api/datasets/rajpurkar/squad/revision/7b6d24c440a36b6815f21b70d25016731768db1f HTTP/1.1" 200 None
+2026-09-15 11:33:29 DEBUG: Attempting to acquire lock 2592820946000 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_rajpurkar___squad_plain_text_0.0.0_7b6d24c440a36b6815f21b70d25016731768db1f.lock
+2026-09-15 11:33:29 DEBUG: Lock 2592820946000 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_rajpurkar___squad_plain_text_0.0.0_7b6d24c440a36b6815f21b70d25016731768db1f.lock
+2026-09-15 11:33:29 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/rajpurkar___squad/plain_text/0.0.0/7b6d24c440a36b6815f21b70d25016731768db1f/dataset_info.json
+2026-09-15 11:33:29 DEBUG: Attempting to release lock 2592820946000 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_rajpurkar___squad_plain_text_0.0.0_7b6d24c440a36b6815f21b70d25016731768db1f.lock
+2026-09-15 11:33:29 DEBUG: Lock 2592820946000 released on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_rajpurkar___squad_plain_text_0.0.0_7b6d24c440a36b6815f21b70d25016731768db1f.lock
+2026-09-15 11:33:29 DEBUG: Attempting to acquire lock 2592760693840 on C:\Users\caotranbadat\.cache\huggingface\datasets\rajpurkar___squad\plain_text\0.0.0\7b6d24c440a36b6815f21b70d25016731768db1f_builder.lock
+2026-09-15 11:33:29 DEBUG: Lock 2592760693840 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\rajpurkar___squad\plain_text\0.0.0\7b6d24c440a36b6815f21b70d25016731768db1f_builder.lock
+2026-09-15 11:33:29 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/rajpurkar___squad/plain_text/0.0.0/7b6d24c440a36b6815f21b70d25016731768db1f/dataset_info.json
+2026-09-15 11:33:29 DEBUG: Attempting to release lock 2592760693840 on C:\Users\caotranbadat\.cache\huggingface\datasets\rajpurkar___squad\plain_text\0.0.0\7b6d24c440a36b6815f21b70d25016731768db1f_builder.lock
+2026-09-15 11:33:29 DEBUG: Lock 2592760693840 released on C:\Users\caotranbadat\.cache\huggingface\datasets\rajpurkar___squad\plain_text\0.0.0\7b6d24c440a36b6815f21b70d25016731768db1f_builder.lock
+2026-09-15 11:33:29 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-15 13:20:31 DEBUG: Using proactor: IocpProactor

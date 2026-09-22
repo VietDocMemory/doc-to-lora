@@ -1,0 +1,87 @@
+2026-09-15 17:15:43 INFO: Logging to: eval_results/google/gemma-2-2b-it/20260915-171543_ccf3f041/debug.log
+2026-09-15 17:15:43 DEBUG: CMD: run_eval.py --model_name_or_path google/gemma-2-2b-it --datasets longbench/multifieldqa_en_e --split test --max_test_samples_per_ds -1 --eval_batch_size_gen 1 --max_new_tokens 128 --truncate_if_too_long_inp
+2026-09-15 17:15:43 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2026-09-15 17:15:44 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2026-09-15 17:15:45 INFO: Using chat template from chat_templates/google/gemma-2-2b-it.jinja
+2026-09-15 17:15:45 DEBUG: Model init kwargs: {'pretrained_model_name_or_path': 'google/gemma-2-2b-it', 'device_map': 'cuda', 'torch_dtype': torch.bfloat16, 'trust_remote_code': True, 'attn_implementation': 'eager', 'use_cache': None}
+2026-09-15 17:15:45 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/config.json HTTP/1.1" 200 0
+2026-09-15 17:15:49 DEBUG: https://huggingface.co:443 "HEAD /google/gemma-2-2b-it/resolve/main/generation_config.json HTTP/1.1" 200 0
+2026-09-15 17:15:49 INFO: Loading dataset longbench/multifieldqa_en_e with split test...
+2026-09-15 17:15:49 DEBUG: Tokenizing dataset with kwargs: {"ds_name": "longbench/multifieldqa_en_e", "split": "test", "add_negative_prompt": false, "max_qas_len": -1, "max_qas_per_sample": 1, "base_model_max_len": 8192, "ctx_model_max_len": null, "add_ctx_to_chat": true, "max_ctx_chunk_len": -1, "min_ctx_chunk_len": -1, "num_chunk_probs": null, "max_ctx_chunk_num": null, "need_ctx_ids": false, "max_new_tokens": 128, "set_format": "pt"}google/gemma-2-2b-itgoogle/gemma-2-2b-it
+2026-09-15 17:15:49 DEBUG: Dataset hash: 21a2ae8cfe1056c1bf94d7b4df93e8c9d5b00058339e09524d3ff096254d90cd
+2026-09-15 17:15:49 INFO: Loading dataset longbench/multifieldqa_en_e with split test...
+2026-09-15 17:15:49 DEBUG: https://huggingface.co:443 "HEAD /datasets/THUDM/LongBench/resolve/main/README.md HTTP/1.1" 307 0
+2026-09-15 17:15:50 DEBUG: https://huggingface.co:443 "HEAD /datasets/zai-org/LongBench/resolve/main/README.md HTTP/1.1" 307 0
+2026-09-15 17:15:50 DEBUG: https://huggingface.co:443 "HEAD /api/resolve-cache/datasets/zai-org/LongBench/5e628be450b7e67fb7ae6e201bd6d8f7056f7672/README.md HTTP/1.1" 200 0
+2026-09-15 17:15:50 DEBUG: Starting new HTTPS connection (1): s3.amazonaws.com:443
+2026-09-15 17:15:53 DEBUG: Starting new HTTPS connection (1): datasets-server.huggingface.co:443
+2026-09-15 17:15:54 DEBUG: https://datasets-server.huggingface.co:443 "GET /parquet?dataset=THUDM/LongBench HTTP/1.1" 404 None
+2026-09-15 17:15:54 DEBUG: Starting new HTTPS connection (2): s3.amazonaws.com:443
+2026-09-15 17:15:55 DEBUG: https://s3.amazonaws.com:443 "HEAD /datasets.huggingface.co/datasets/datasets/THUDM/LongBench/THUDM/LongBench.py HTTP/1.1" 404 0
+2026-09-15 17:15:55 DEBUG: https://huggingface.co:443 "GET /api/datasets/THUDM/LongBench/revision/5e628be450b7e67fb7ae6e201bd6d8f7056f7672 HTTP/1.1" 307 116
+2026-09-15 17:15:55 DEBUG: https://huggingface.co:443 "GET /api/datasets/zai-org/LongBench/revision/5e628be450b7e67fb7ae6e201bd6d8f7056f7672 HTTP/1.1" 200 None
+2026-09-15 17:15:56 DEBUG: https://huggingface.co:443 "HEAD /datasets/THUDM/LongBench/resolve/5e628be450b7e67fb7ae6e201bd6d8f7056f7672/dataset_infos.json HTTP/1.1" 307 0
+2026-09-15 17:15:56 DEBUG: https://huggingface.co:443 "HEAD /datasets/zai-org/LongBench/resolve/5e628be450b7e67fb7ae6e201bd6d8f7056f7672/dataset_infos.json HTTP/1.1" 404 0
+2026-09-15 17:15:56 DEBUG: Attempting to acquire lock 3007382221264 on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:15:56 DEBUG: Lock 3007382221264 acquired on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:15:56 DEBUG: Attempting to release lock 3007382221264 on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:15:56 DEBUG: Lock 3007382221264 released on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:15:56 DEBUG: Attempting to acquire lock 3007362585744 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_THUDM___long_bench_multifieldqa_en_e_1.0.0_4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.lock
+2026-09-15 17:15:56 DEBUG: Lock 3007362585744 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_THUDM___long_bench_multifieldqa_en_e_1.0.0_4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.lock
+2026-09-15 17:15:56 DEBUG: Attempting to release lock 3007362585744 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_THUDM___long_bench_multifieldqa_en_e_1.0.0_4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.lock
+2026-09-15 17:15:56 DEBUG: Lock 3007362585744 released on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_THUDM___long_bench_multifieldqa_en_e_1.0.0_4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.lock
+2026-09-15 17:15:56 DEBUG: Attempting to acquire lock 3007382001360 on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:15:56 DEBUG: Lock 3007382001360 acquired on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:15:56 DEBUG: Attempting to release lock 3007382001360 on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:15:56 DEBUG: Lock 3007382001360 released on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:15:56 DEBUG: Attempting to acquire lock 3007380779984 on C:\Users\caotranbadat\.cache\huggingface\datasets\THUDM___long_bench\multifieldqa_en_e\1.0.0\4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e_builder.lock
+2026-09-15 17:15:56 DEBUG: Lock 3007380779984 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\THUDM___long_bench\multifieldqa_en_e\1.0.0\4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e_builder.lock
+2026-09-15 17:15:56 DEBUG: https://huggingface.co:443 "GET /api/datasets/THUDM/LongBench/revision/main HTTP/1.1" 307 80
+2026-09-15 17:15:56 DEBUG: https://huggingface.co:443 "GET /api/datasets/zai-org/LongBench/revision/main HTTP/1.1" 200 None
+2026-09-15 17:15:57 DEBUG: https://huggingface.co:443 "HEAD /datasets/THUDM/LongBench/resolve/main/data.zip HTTP/1.1" 307 0
+2026-09-15 17:15:57 DEBUG: https://huggingface.co:443 "HEAD /datasets/zai-org/LongBench/resolve/main/data.zip HTTP/1.1" 302 0
+2026-09-15 17:15:57 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/THUDM___long_bench/multifieldqa_en_e/1.0.0/4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.incomplete/long_bench-test-00000-00000-of-NNNNN.arrow
+2026-09-15 17:15:57 DEBUG: Attempting to acquire lock 3007380740176 on C:\Users\caotranbadat\.cache\huggingface\datasets\THUDM___long_bench\multifieldqa_en_e\1.0.0\4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.incomplete_info.lock
+2026-09-15 17:15:57 DEBUG: Lock 3007380740176 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\THUDM___long_bench\multifieldqa_en_e\1.0.0\4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.incomplete_info.lock
+2026-09-15 17:15:57 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/THUDM___long_bench/multifieldqa_en_e/1.0.0/4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.incomplete/dataset_info.json
+2026-09-15 17:15:57 DEBUG: Attempting to release lock 3007380740176 on C:\Users\caotranbadat\.cache\huggingface\datasets\THUDM___long_bench\multifieldqa_en_e\1.0.0\4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.incomplete_info.lock
+2026-09-15 17:15:57 DEBUG: Lock 3007380740176 released on C:\Users\caotranbadat\.cache\huggingface\datasets\THUDM___long_bench\multifieldqa_en_e\1.0.0\4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.incomplete_info.lock
+2026-09-15 17:15:57 DEBUG: Attempting to release lock 3007380779984 on C:\Users\caotranbadat\.cache\huggingface\datasets\THUDM___long_bench\multifieldqa_en_e\1.0.0\4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e_builder.lock
+2026-09-15 17:15:57 DEBUG: Lock 3007380779984 released on C:\Users\caotranbadat\.cache\huggingface\datasets\THUDM___long_bench\multifieldqa_en_e\1.0.0\4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e_builder.lock
+2026-09-15 17:16:26 INFO: Constructing and tokenizing longbench/multifieldqa_en_e with test split...
+2026-09-15 17:16:40 DEBUG: Tokenizing inputs
+2026-09-15 17:16:40 INFO: Tokenizing 150 messages...
+2026-09-15 17:16:41 DEBUG: open file: C:/Users/caotranbadat/AppData/Local/Temp/hf_datasets-nz93qmm1/tmp9rq6a2o9
+2026-09-15 17:16:41 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-15 17:16:54 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-15 17:17:04 DEBUG: open file: C:/Users/caotranbadat/AppData/Local/Temp/hf_datasets-nz93qmm1/tmpzvda7ehq
+2026-09-15 17:17:04 DEBUG: open file: C:/Users/caotranbadat/AppData/Local/Temp/hf_datasets-nz93qmm1/tmpyu67_7v_
+2026-09-15 17:17:05 DEBUG: https://huggingface.co:443 "HEAD /datasets/THUDM/LongBench/resolve/main/README.md HTTP/1.1" 307 0
+2026-09-15 17:17:05 DEBUG: https://huggingface.co:443 "HEAD /datasets/zai-org/LongBench/resolve/main/README.md HTTP/1.1" 307 0
+2026-09-15 17:17:05 DEBUG: https://huggingface.co:443 "HEAD /api/resolve-cache/datasets/zai-org/LongBench/5e628be450b7e67fb7ae6e201bd6d8f7056f7672/README.md HTTP/1.1" 200 0
+2026-09-15 17:17:05 DEBUG: Resetting dropped connection: s3.amazonaws.com
+2026-09-15 17:17:07 DEBUG: https://s3.amazonaws.com:443 "HEAD /datasets.huggingface.co/datasets/datasets/THUDM/LongBench/THUDM/LongBench.py HTTP/1.1" 404 0
+2026-09-15 17:17:07 DEBUG: https://datasets-server.huggingface.co:443 "GET /parquet?dataset=THUDM/LongBench HTTP/1.1" 404 None
+2026-09-15 17:17:08 DEBUG: https://s3.amazonaws.com:443 "HEAD /datasets.huggingface.co/datasets/datasets/THUDM/LongBench/THUDM/LongBench.py HTTP/1.1" 404 0
+2026-09-15 17:17:08 DEBUG: https://huggingface.co:443 "HEAD /datasets/THUDM/LongBench/resolve/5e628be450b7e67fb7ae6e201bd6d8f7056f7672/dataset_infos.json HTTP/1.1" 307 0
+2026-09-15 17:17:09 DEBUG: https://huggingface.co:443 "HEAD /datasets/zai-org/LongBench/resolve/5e628be450b7e67fb7ae6e201bd6d8f7056f7672/dataset_infos.json HTTP/1.1" 404 0
+2026-09-15 17:17:09 DEBUG: Attempting to acquire lock 3007363213328 on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:17:09 DEBUG: Lock 3007363213328 acquired on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:17:09 DEBUG: Attempting to release lock 3007363213328 on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:17:09 DEBUG: Lock 3007363213328 released on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:17:09 DEBUG: Attempting to acquire lock 3007380609488 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_THUDM___long_bench_multifieldqa_en_e_1.0.0_4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.lock
+2026-09-15 17:17:09 DEBUG: Lock 3007380609488 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_THUDM___long_bench_multifieldqa_en_e_1.0.0_4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.lock
+2026-09-15 17:17:09 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/THUDM___long_bench/multifieldqa_en_e/1.0.0/4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e/dataset_info.json
+2026-09-15 17:17:09 DEBUG: Attempting to release lock 3007380609488 on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_THUDM___long_bench_multifieldqa_en_e_1.0.0_4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.lock
+2026-09-15 17:17:09 DEBUG: Lock 3007380609488 released on C:\Users\caotranbadat\.cache\huggingface\datasets\_Users_caotranbadat_.cache_huggingface_datasets_THUDM___long_bench_multifieldqa_en_e_1.0.0_4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e.lock
+2026-09-15 17:17:09 DEBUG: Attempting to acquire lock 3007380609488 on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:17:09 DEBUG: Lock 3007380609488 acquired on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:17:09 DEBUG: Attempting to release lock 3007380609488 on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:17:09 DEBUG: Lock 3007380609488 released on C:\Users\caotranbadat\.cache\huggingface\modules\datasets_modules\datasets\THUDM--LongBench.lock
+2026-09-15 17:17:09 DEBUG: Attempting to acquire lock 3007362593616 on C:\Users\caotranbadat\.cache\huggingface\datasets\THUDM___long_bench\multifieldqa_en_e\1.0.0\4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e_builder.lock
+2026-09-15 17:17:09 DEBUG: Lock 3007362593616 acquired on C:\Users\caotranbadat\.cache\huggingface\datasets\THUDM___long_bench\multifieldqa_en_e\1.0.0\4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e_builder.lock
+2026-09-15 17:17:09 DEBUG: open file: C:/Users/caotranbadat/.cache/huggingface/datasets/THUDM___long_bench/multifieldqa_en_e/1.0.0/4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e/dataset_info.json
+2026-09-15 17:17:09 DEBUG: Attempting to release lock 3007362593616 on C:\Users\caotranbadat\.cache\huggingface\datasets\THUDM___long_bench\multifieldqa_en_e\1.0.0\4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e_builder.lock
+2026-09-15 17:17:09 DEBUG: Lock 3007362593616 released on C:\Users\caotranbadat\.cache\huggingface\datasets\THUDM___long_bench\multifieldqa_en_e\1.0.0\4a916a4bde5c3481ac49b84d5dde69a9d2eefcd67f884ef65b3d97ee7cc91f3e_builder.lock
+2026-09-15 17:17:09 WARNING: Setting TOKENIZERS_PARALLELISM=false for forked processes.
+2026-09-15 17:40:50 DEBUG: Using proactor: IocpProactor

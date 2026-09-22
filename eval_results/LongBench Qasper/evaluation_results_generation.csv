@@ -1,0 +1,14 @@
+model_name,group_len,tasks,num_samples,qa_f1,qa_precision,qa_f1_score,qa_recall
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-154846_69cd982b,0-127,test_longbench/qasper_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-154846_69cd982b,128-255,test_longbench/qasper_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-154846_69cd982b,256-511,test_longbench/qasper_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-154846_69cd982b,0-511,test_longbench/qasper_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-154846_69cd982b,512-1023,test_longbench/qasper_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-154846_69cd982b,1024-2047,test_longbench/qasper_e,1,None,0.0,0.0,0.0
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-154846_69cd982b,2048-4095,test_longbench/qasper_e,51,None,0.5289738855915327,0.44097155619834383,0.42574961039882214
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-154846_69cd982b,4096-8191,test_longbench/qasper_e,140,None,0.47091880149375626,0.3924291467274337,0.40648773521530085
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-154846_69cd982b,0-8191,test_longbench/qasper_e,192,None,0.48388698111611483,0.40327932243727216,0.40948704719001067
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-154846_69cd982b,8192-16383,test_longbench/qasper_e,18,None,0.3093711843711844,0.2723687973687974,0.27768670309653914
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-154846_69cd982b,16384-32767,test_longbench/qasper_e,14,None,0.27515589569161,0.28937865380916133,0.33526592455163884
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-154846_69cd982b,32768-inf,test_longbench/qasper_e,0,None,N/A,N/A,N/A
+gemma-2-2b-it_eval_results/google/gemma-2-2b-it/20260915-154846_69cd982b,overall,test_longbench/qasper_e,224,N/A,0.4568176974672228,0.38564093488358425,0.3942571279461728
