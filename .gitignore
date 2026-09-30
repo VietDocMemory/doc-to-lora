@@ -33,3 +33,4 @@ watcher_state.yaml
 .wandb/
 .ruff_cache/
 .codegraph/
+.env
