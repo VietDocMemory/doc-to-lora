@@ -1,5 +1,6 @@
 import os
 import sys
+import importlib.util
 from pathlib import Path
 
 import gradio as gr
@@ -89,7 +90,7 @@ def load_checkpoint(
         modulated_model = ModulatedPretrainedModel.from_state_dict(
             state_dict,
             train=False,
-            use_flash_attn=True,
+            use_flash_attn=importlib.util.find_spec("flash_attn") is not None,
             use_sequence_packing=False,
         )
         modulated_model = modulated_model.to(device).to(torch.bfloat16)
