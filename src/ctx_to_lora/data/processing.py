@@ -22,6 +22,7 @@ from ctx_to_lora.data.definitions import (
     RAW_DATA_DIR,
     SELF_GEN_DATA_DIR,
     TRANSFORMED_DATA_DIR,
+    VIQUAD2_ABSTENTION,
 )
 from ctx_to_lora.data.packing import pack_batch
 from ctx_to_lora.data.preprocessing_fn import get_preprocessing_fn
@@ -32,6 +33,7 @@ logger = logging.getLogger()
 
 COLS_TO_KEEP_PREPROCESSING = [
     "context",
+    "system_message",
     "prompts",
     "responses",
     "qas",
@@ -86,6 +88,20 @@ def load_answers(ds_name, split):
 
         def extract_ans(sample):
             return {"answers": sample["answers_spans"]["spans"]}
+
+    elif ds_name in {"viquad2", "viquad2_balanced"}:
+
+        def extract_ans(sample):
+            if bool(sample.get("is_impossible", False)):
+                return {"answers": [VIQUAD2_ABSTENTION]}
+            value = sample.get("answers") or {}
+            texts = value.get("text", []) if isinstance(value, dict) else value
+            if isinstance(texts, str):
+                texts = [texts]
+            return {"answers": [str(text).strip() for text in texts if str(text).strip()]}
+
+    else:
+        raise ValueError(f"No multi-answer extractor registered for {ds_name!r}")
 
     ds_kwargs = get_ds_kwargs(ds_name, split)
     ds = load_dataset(**ds_kwargs, trust_remote_code=True)
@@ -304,6 +320,11 @@ def get_tokenized_dataset(
     all_kwargs = {**load_and_process_kwargs, **tokenize_kwargs}
     kwargs_str = json.dumps(all_kwargs)
     kwargs_str += tokenizer.name_or_path + ctx_tokenizer.name_or_path
+    if ds_name in {"viquad2", "viquad2_balanced"}:
+        # Prompt changes must invalidate previously tokenized ViQuAD2 caches.
+        from ctx_to_lora.data.definitions import VIQUAD2_SYSTEM_PROMPT
+
+        kwargs_str += VIQUAD2_SYSTEM_PROMPT + VIQUAD2_ABSTENTION
     logger.debug(f"Tokenizing dataset with kwargs: {kwargs_str}")
     kwargs_str += repr(tokenizer) + repr(ctx_tokenizer)
     ds_hash = sha256(kwargs_str.encode()).hexdigest()

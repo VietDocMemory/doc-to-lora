@@ -3,7 +3,12 @@ import random
 from collections.abc import Callable
 from typing import Any
 
-from ctx_to_lora.data.definitions import CLOSED_QA_INTX_TEMPLATES, EVAL_INTX_TEMPLATES
+from ctx_to_lora.data.definitions import (
+    CLOSED_QA_INTX_TEMPLATES,
+    EVAL_INTX_TEMPLATES,
+    VIQUAD2_ABSTENTION,
+    VIQUAD2_SYSTEM_PROMPT,
+)
 from ctx_to_lora.utils import concat_list
 
 logger = logging.getLogger()
@@ -25,6 +30,23 @@ def chat_to_str(messages: list[dict[str, str]]):
     )
 
 
+def extract_viquad2_answer(value: Any) -> str:
+    """Return the first annotated answer without using plausible answers."""
+    if isinstance(value, dict):
+        texts = value.get("text", [])
+        if isinstance(texts, str):
+            return texts.strip()
+        return str(texts[0]).strip() if texts else ""
+    if isinstance(value, list):
+        if not value:
+            return ""
+        first = value[0]
+        if isinstance(first, dict):
+            return str(first.get("text", "")).strip()
+        return str(first).strip()
+    return str(value or "").strip()
+
+
 def get_preprocessing_fn(
     ds_name: str,
     is_eval: bool,
@@ -43,7 +65,30 @@ def get_preprocessing_fn(
         # already processed data, do nothing
         return f
 
-    if "fw_qa_v2" in ds_name:
+    if ds_name in {"viquad2", "viquad2_balanced"}:
+
+        def f(sample):
+            impossible = bool(sample.get("is_impossible", False))
+            response = (
+                VIQUAD2_ABSTENTION
+                if impossible
+                else extract_viquad2_answer(sample.get("answers"))
+            )
+            if not response:
+                return {
+                    "context": None,
+                    "prompt": None,
+                    "response": None,
+                    "system_message": None,
+                }
+            return {
+                "context": str(sample.get("context", "")).strip(),
+                "prompt": str(sample.get("question", "")).strip(),
+                "response": response,
+                "system_message": VIQUAD2_SYSTEM_PROMPT,
+            }
+
+    elif "fw_qa_v2" in ds_name:
 
         def f(sample):
             # get questions/answers from all levels in the ds

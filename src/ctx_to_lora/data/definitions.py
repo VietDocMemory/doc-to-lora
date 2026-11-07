@@ -4,6 +4,18 @@ TRANSFORMED_DATA_DIR = "data/processed_datasets"
 RAW_DATA_DIR = "data/raw_datasets/"
 SELF_GEN_DATA_DIR = f"{RAW_DATA_DIR}/self_gen/"
 
+VIQUAD2_ABSTENTION = "Tài liệu không đề cập."
+
+VIQUAD2_SYSTEM_PROMPT = (
+    "Bạn là trợ lý trả lời câu hỏi bằng tiếng Việt dựa trên tài liệu đã "
+    "được ghi vào bộ nhớ của mô hình.\n"
+    "Chỉ sử dụng thông tin được nêu rõ trong bộ nhớ; không dùng kiến thức "
+    "bên ngoài, không bịa thêm thông tin và không suy đoán.\n"
+    "Nếu bộ nhớ không nêu rõ thông tin cụ thể mà câu hỏi yêu cầu, chỉ trả "
+    f"lời đúng: \"{VIQUAD2_ABSTENTION}\"\n"
+    "Chỉ xuất ra câu trả lời trực tiếp, ngắn gọn và không thêm giải thích."
+)
+
 # for chunking
 CTX_AFFIXES = {
     "google/gemma-2-2b-it": {
@@ -36,6 +48,25 @@ LONGBENCH_E_TASKS = [
 ]
 
 DS_KWARGS = {
+    "viquad2": dict(
+        train=dict(path="taidng/UIT-ViQuAD2.0", split="train"),
+        validation=dict(path="taidng/UIT-ViQuAD2.0", split="validation"),
+        test=dict(path="taidng/UIT-ViQuAD2.0", split="test"),
+    ),
+    "viquad2_balanced": dict(
+        train=dict(
+            path="parquet",
+            data_files="data/raw_datasets/viquad2_balanced/train/ds.parquet",
+            split="train",
+        ),
+        validation=dict(
+            path="parquet",
+            data_files=(
+                "data/raw_datasets/viquad2_balanced/validation/ds.parquet"
+            ),
+            split="train",
+        ),
+    ),
     "pwc": dict(
         train=dict(path="sggetao/PwC", split="train"),
         validation=dict(path="sggetao/PwC", split="test[:900]"),
@@ -168,6 +199,8 @@ for ds_name in LONGBENCH_TASKS + LONGBENCH_E_TASKS:
 
 
 CLOSED_QA_DATASETS = {
+    "viquad2",
+    "viquad2_balanced",
     "longbench/qasper",
     "longbench/multifieldqa_en",
     "longbench/2wikimqa",
@@ -181,6 +214,8 @@ CLOSED_QA_DATASETS = {
 }
 
 MULTI_ANSWER_DATASETS = {
+    "viquad2",
+    "viquad2_balanced",
     "longbench/qasper",
     "longbench/multifieldqa_en",
     "longbench/hotpotqa",
