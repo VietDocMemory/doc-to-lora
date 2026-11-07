@@ -343,9 +343,10 @@ def main():
             train_ds,
             ctx_args.max_packed_inp_len,
             ctx_args.max_packed_ctx_len,
-            max_packed_size=-1,
+            # Eager attention cannot safely mix multiple packed QA sequences.
+            max_packed_size=1,
             seed=training_args.seed,
-            num_proc=30,
+            num_proc=4,
         )
         logger.info("Setting per_device_train_batch_size to 1")
         training_args.per_device_train_batch_size = 1

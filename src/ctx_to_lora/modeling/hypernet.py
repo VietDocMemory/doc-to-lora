@@ -545,7 +545,8 @@ class ModulatedPretrainedModel(nn.Module):
             train=self.base_model.training,
             requires_grad=False,
             use_flash_attn=base_model_attn_impl == "flash_attention_2",
-            use_q_lora=self.ctx_encoder_args.quantize_ctx_encoder,
+            # bitsandbytes does not ship a CUDA 13 binary in the Molab runtime.
+            use_q_lora=False,
         )
         self.ctx_encoder = CTX_ENCODER_CLS[self.ctx_encoder_args.ctx_encoder_type](
             encoder_model, self.ctx_encoder_args

@@ -20,7 +20,6 @@ from torch import nn
 from transformers.activations import ACT2FN
 from transformers.cache_utils import Cache
 from transformers.configuration_utils import PretrainedConfig
-from transformers.modeling_attn_mask_utils import _prepare_4d_attention_mask
 from transformers.modeling_utils import PreTrainedModel
 from transformers.models.idefics2.configuration_idefics2 import Idefics2Config
 from transformers.utils import (
@@ -246,12 +245,14 @@ class Idefics2PerceiverAttention(nn.Module):
     def forward(
         self,
         latents: torch.Tensor,
-        context: torch.Tensor,
+        context: torch.Tensor | None = None,
         attention_mask: torch.Tensor | None = None,
         position_ids: torch.LongTensor | None = None,
         past_key_value: tuple[torch.Tensor] | None = None,
         output_attentions: bool = False,
         use_cache: bool = False,
+        is_cross_attn: bool = True,
+        **kwargs,
     ) -> tuple[torch.Tensor, torch.Tensor | None, tuple[torch.Tensor] | None]:
         """
         Runs Perceiver Self-Attention, with special (context, latents) appended along the `seq` dimension!
@@ -265,6 +266,9 @@ class Idefics2PerceiverAttention(nn.Module):
             output_attentions (`bool`, *optional*, defaults to `False`): Whether to return attention weights.
             use_cache (`bool`, *optional*, defaults to `False`): Whether to use past_key_value for caching.
         """
+        if context is None or not is_cross_attn:
+            context = latents
+
         bsz, q_len, _ = latents.size()
         kv_seq_len = q_len + context.size()[1]
 
@@ -448,7 +452,7 @@ class Idefics2PerceiverFlashAttention2(Idefics2PerceiverAttention):
 
 
 IDEFICS2_PERCEIVER_ATTENTION_CLASSES = {
-    # "eager": Idefics2PerceiverAttention,
+    "eager": Idefics2PerceiverAttention,
     "flash_attention_2": Idefics2PerceiverFlashAttention2,
 }
 
@@ -612,7 +616,6 @@ class Idefics2PerceiverResampler(Idefics2PreTrainedModel):
         self.layernorm = Idefics2RMSNorm(self.hidden_size, eps=self.rms_norm_eps)
 
         self._use_flash_attention_2 = config._attn_implementation == "flash_attention_2"
-        assert self._use_flash_attention_2
 
     def forward(
         self,
@@ -629,13 +632,10 @@ class Idefics2PerceiverResampler(Idefics2PreTrainedModel):
 
         latents = self.latents_q.unsqueeze(0).expand((bsz, *self.latents_q.size()))
 
-        attention_mask = (
-            _prepare_4d_attention_mask(
-                attention_mask, latents.dtype, tgt_len=self.n_latents
-            )
-            if not self._use_flash_attention_2
-            else attention_mask
-        )
+        # Eager fallback does not use FlashAttention padding/unpadding metadata.
+        # Training packs one QA per sequence, so no cross-sample mask is needed.
+        if not self._use_flash_attention_2:
+            attention_mask = None
 
         compressed_context = latents
 
@@ -675,7 +675,10 @@ class Idefics2PerceiverResampler(Idefics2PreTrainedModel):
             max_length_k = position_ids.max() + 1
 
         else:
-            raise ValueError("either position_ids or attention_mask is required")
+            if self._use_flash_attention_2:
+                raise ValueError("either position_ids or attention_mask is required")
+            cu_seq_lens_k = None
+            max_length_k = None
         x_attn_kwargs = dict(
             position_ids=position_ids,
             cu_seq_lens_q=cu_seq_lens_q,
