@@ -14,7 +14,8 @@ def test_viquad2_answerable_uses_annotated_answer():
         }
     )
 
-    assert result["response"] == "Hà Nội"
+    assert result["prompts"] == ["Thủ đô của Việt Nam là gì?"]
+    assert result["responses"] == ["Hà Nội"]
     assert result["system_message"] == VIQUAD2_SYSTEM_PROMPT
 
 
@@ -30,5 +31,6 @@ def test_viquad2_unanswerable_ignores_plausible_answer():
         }
     )
 
-    assert result["response"] == VIQUAD2_ABSTENTION
-    assert "12 quận" not in result["response"]
+    assert result["prompts"] == ["Hà Nội có bao nhiêu quận vào năm 1900?"]
+    assert result["responses"] == [VIQUAD2_ABSTENTION]
+    assert "12 quận" not in result["responses"][0]
